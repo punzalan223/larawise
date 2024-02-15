@@ -1,0 +1,82 @@
+.login-section{
+    height: 100%;
+    display: flex;
+    padding: 15px;
+}
+
+.glass-card {
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    /* backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px); */
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    position: relative;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: -1;
+}
+
+.glass-content{
+    padding: 30px;
+}
+
+.login-input{
+    display: flex;
+    flex-direction: column;
+    margin: 25px 0;
+}
+
+.login-input input{
+    border: none;
+    border-bottom: 2px solid #008080;
+    color: #001F3F;
+    background-color: transparent;
+    padding: 15px 0;
+    font-size: 1rem;
+}
+
+.login-input input:focus{
+    outline: none;
+    border-bottom: 2px solid #a63309;
+}
+
+.login-input input::placeholder{
+    color: #7c7171;
+    font-weight: bold;
+}
+
+#login-btn{
+    width: 100%;
+    background: #008080;
+    border: none;
+    font-size: 1rem;
+}
+
+#login-btn:hover{
+    opacity: 0.7;
+}
+
+#login-glass-img{
+    object-fit: cover;
+    height: 250px;
+    width: 100%;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.t-color{
+    color: #3E2723;
+}
+

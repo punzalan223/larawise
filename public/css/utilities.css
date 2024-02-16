@@ -530,7 +530,6 @@ input::file-selector-button {
 .user-profile-box {
     min-height: 11rem;
     border-radius: 5px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     overflow: hidden;
 }
 
@@ -543,6 +542,12 @@ input::file-selector-button {
     flex-grow: 4;
     flex-basis: 500px;
 }
+
+.swal2-toast {
+    background: linear-gradient(to right, #437e83, #39676a) !important;
+    color: #fff;
+}
+
 
 /* Use a media query to apply styles for smaller screens */
 @media only screen and (max-width: 500px) {

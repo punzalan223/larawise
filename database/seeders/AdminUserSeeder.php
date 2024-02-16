@@ -24,5 +24,16 @@ class AdminUserSeeder extends Seeder
             'status' => 'ACTIVE',
             'created_by' => 1,
         ]);
+
+        User::create([
+            'name' => 'Fillinor Gunio',
+            'first_name' => 'Fillinor',
+            'last_name' => 'Gunio',
+            'contact' => '09763896443',
+            'email' => 'filongunio@gmail.com',
+            'password' => Hash::make('qwerty'),
+            'status' => 'ACTIVE',
+            'created_by' => 1,
+        ]);
     }
 }

@@ -1,4 +1,5 @@
 <div class="u-mt-10" x-data="{ showModalAddUser: false, showModalEditUser: false, showModalViewUser: false }">
+    
     <div class="modal-center" x-show="showModalAddUser" style="display: none;">
         <div class="modal-box" @click.outside="showModalAddUser = false">
             <div class="modal-content">

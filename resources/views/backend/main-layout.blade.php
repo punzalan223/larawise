@@ -12,6 +12,8 @@
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/utilities.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main-layout/main.css') }}">
+    {{-- Sweetalert2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <main x-data="{ initialized: false, showSidenav: true }" x-init="init">

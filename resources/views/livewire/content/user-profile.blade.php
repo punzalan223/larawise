@@ -1,43 +1,48 @@
 <div class="u-mt-10">
     <div class="u-flex u-flex-wrap" style="gap: 1rem;">
-        <div class="user-profile-box flex-1 u-bg-white">
+        <div class="user-profile-box flex-1 u-box-shadow-default u-bg-white">
             <div class="u-p-5">
-                <form action="">
+                <form wire:submit="editUser">
                     <table class="custom_normal_table">
                         <tbody>
                             <tr>
                                 <td>
-                                    <h3 class="u-fw-b"><i class="fa-solid fa-user"></i> Edit User</h3>
+                                    <div class="u-flex-alignIt-center">
+                                        <div class="s-box-sm u-p-10-15 u-border-radius-5 u-mr-5">
+                                            <h3 class="u-t-primary"><i class="fa-solid fa-user"></i></h3>
+                                        </div>
+                                        <h4 class="u-fw-b u-t-dark"> User Information</h4>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <p>First name</p>
-                                    <input class="u-input" wire:model="first_name" value="{{ auth()->user()->first_name }}" name="first_name" type="text" placeholder="Enter first name" required>
+                                    <input class="u-input" wire:model="e_first_name" name="first_name" type="text" placeholder="Enter first name" required>
                                 </td>
                                 <td>
                                     <p>Last Name</p>
-                                    <input class="u-input" wire:model="last_name" value="{{ auth()->user()->last_name }}" name="last_name" type="text" placeholder="Enter last name" required>
+                                    <input class="u-input" wire:model="e_last_name" name="last_name" type="text" placeholder="Enter last name" required>
                                 </td>                            
                             </tr>
                             <tr>
                                 <td>
                                     <p>Contact</p>
-                                    <input class="u-input" wire:model="contact" value="{{ auth()->user()->contact }}" name="contact" type="text" placeholder="Enter contact number" required>
+                                    <input class="u-input" wire:model="e_contact" name="contact" type="text" placeholder="Enter contact number" required>
                                 </td>
                                 <td>
                                     <p>Email</p>
-                                    <input class="u-input" wire:model="email" value="{{ auth()->user()->email }}" name="email" type="text" placeholder="Enter email" disabled>
+                                    <input class="u-input" wire:model="e_email" name="email" type="text" placeholder="Enter email" disabled>
                                 </td>                            
                             </tr>
                             <tr>
                                 <td>
                                     <p>Password</p>
-                                    <input class="u-input" wire:model="password" name="password" type="password" placeholder="Enter password">
+                                    <input class="u-input" wire:model="e_password" name="password" type="password" placeholder="Enter password">
                                 </td>
                                 <td>
                                     <p>Confirm Password</p>
-                                    <input class="u-input" wire:model="password_confirmation" name="password_confirmation" type="password" placeholder="Enter confirm password">
+                                    <input class="u-input" wire:model="e_password_confirmation" name="password_confirmation" type="password" placeholder="Enter confirm password">
                                 </td>                            
                             </tr>
                             <tr>
@@ -48,16 +53,65 @@
                             </tr>
                         </tbody>
                     </table>
+                    @if($errors->hasAny(['e_first_name', 'e_last_name', 'e_contact', 'e_email', 'e_password']))
+                    <div class="u-m-10 u-bg-danger u-p-10 u-fw-b u-t-white">
+                        @error('e_first_name')
+                            <h5>⚠️ {{ $message }}</h5>
+                        @enderror
+                        @error('e_last_name')
+                            <h5>⚠️ {{ $message }}</h5>
+                        @enderror
+                        @error('e_contact')
+                            <h5>⚠️ {{ $message }}</h5>
+                        @enderror
+                        @error('e_email')
+                            <h5>⚠️ {{ $message }}</h5>
+                        @enderror
+                        @error('e_password')
+                            <h5>⚠️ {{ $message }}</h5>
+                        @enderror
+                    </div>
+                    @endif
                     <div class="u-flex-end u-mb-5">
                         <button class="u-t-white u-fw-b u-btn u-bg-primary u-m-10 u-border-1-default" type="submit"><i class="fa-solid fa-pencil"></i> Update</button>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="user-profile-box flex-2 u-bg-white">
-            <div>
-                <h3 class="u-fw-b">Settings</h1>
+        <div class="user-profile-box flex-2">
+            <div class="u-box-shadow-default u-bg-white u-p-15">
+                <div class="u-flex-alignIt-center">
+                    <div class="s-box-sm u-p-10-15 u-border-radius-5 u-mr-5">
+                        <h3 class="u-t-danger"><i class="fa-solid fa-gear"></i></h3>
+                    </div>
+                    <h4 class="u-fw-b u-t-dark">Settings</h4>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+@script
+<script>
+    $wire.on('edit-success', () => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "bottom-end",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            customClass: {
+                container: 'custom-toast'
+            },
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+        }
+        });
+            Toast.fire({
+            icon: "success",
+            title: "Updated successfully"
+        });
+    });
+</script>
+@endscript

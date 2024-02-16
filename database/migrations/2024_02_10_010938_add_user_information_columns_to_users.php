@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('contact')->nullable()->after('last_name');
             $table->string('status')->nullable()->after('contact');
             $table->string('privilege_id')->nullable()->after('status');
+            $table->string('img')->nullable()->after('privilege_id');
         });
     }
 
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->dropColumn('contact');
             $table->dropColumn('status');
             $table->dropColumn('privilege_id');
+            $table->dropColumn('img');
         });
     }
 };

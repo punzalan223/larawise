@@ -1,5 +1,5 @@
 <div class="sidebar-box" x-show="showSidenav" x-transition.duration.300ms>
-    <a href="" class="sidebar-logo">
+    <a href="{{ url('/dashboard') }}" class="sidebar-logo">
         <div class="sidebar-logo-content">
             <div>
                 <img src="{{ asset('img/digits-assets/digits-icon.png') }}" alt="" id="store-logo-img">
@@ -12,10 +12,10 @@
     <div class="sidebar-body">
         <div class="sidebar-user">
             <div class="sidebar-profile-content">
-                <img src="{{ asset('img/user-profile/patrick.jpg') }}" alt="">
+                <img src="{{ auth()->user()->img ? asset('storage/img/user-profiles/'.auth()->user()->img) : '' }}" alt="">
             </div>
             <div class="sidebar-name">
-                <h6 class="u-t-white u-fw-b">Patrick Lester Punzalan</h6>
+                <h6 class="u-t-white u-fw-b">{{ auth()->user()->name }}</h6>
             </div>
         </div>
         <div class="sidebar-modules">

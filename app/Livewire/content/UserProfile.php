@@ -11,6 +11,8 @@ use Livewire\Component;
 
 class UserProfile extends Component
 {
+    use WithFileUploads;
+
     public $user_id = '';
 
     public $auth_user_information = '';
@@ -22,9 +24,13 @@ class UserProfile extends Component
     public $e_email = '';
     public $e_password = '';
     public $e_password_confirmation = '';
+    public $e_photo;
 
     public function editUser()
     {
+        $user = User::find($this->user_id);
+        $message = 'Updated Successfully';
+
         $rules = [
             'e_first_name' => 'required',
             'e_last_name' => 'required',
@@ -32,7 +38,6 @@ class UserProfile extends Component
             'e_email' => 'required|email',
         ];
 
-        // Check uniqueness of email only if it's different from the current user's email
         if ($this->e_email !== $this->auth_user_information->email) {
             $rules['e_email'] .= '|unique:users';
         }
@@ -41,10 +46,13 @@ class UserProfile extends Component
             $rules['e_password'] = 'required|min:4|confirmed';
         }
 
+        if($this->e_photo){
+            $rules['e_photo'] =  'image|max:1024';
+        }
+
         $this->validate($rules);
 
-
-        User::find($this->user_id)
+        $user->find($this->user_id)
             ->update([
                 'first_name' => $this->e_first_name,
                 'last_name' => $this->e_last_name,
@@ -53,12 +61,30 @@ class UserProfile extends Component
             ]);
 
         if($this->e_password){
-            User::find($this->user_id)->update([
+            $user->find($this->user_id)->update([
                 "password" => Hash::make($this->e_password)
             ]);
         }
 
-        $this->dispatch('edit-success');
+        if ($this->e_photo) {
+            // Get the client extension of the uploaded photo
+            $extension = $this->e_photo->getClientOriginalExtension();
+        
+            // Construct a unique file name based on user ID and first name
+            $first_name = $this->auth_user_information->first_name;
+            $file_name = "$this->user_id-$first_name.$extension";
+
+            $user->update(['img' => $file_name]);
+            
+            // Store the uploaded photo in the public directory
+            $this->e_photo->storePubliclyAs("img/user-profiles", $file_name, 'public');
+
+            $message = 'Profile image updated. Refresh page to see changes';
+        }
+
+        $this->reset(['e_password', 'e_password_confirmation']);
+        
+        $this->dispatch('edit-success', message: $message);
     }
 
     public function render()

@@ -25,6 +25,8 @@ class User extends Authenticatable
         'email',
         'password',
         'status',
+        'img',
+        'privilege_id',
         'updated_at',
         'updated_by'
     ];

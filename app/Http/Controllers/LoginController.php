@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UsersAppSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -79,6 +80,8 @@ class LoginController extends Controller
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
+            $request->session()->put('app_settings', UsersAppSetting::first());
+
             return redirect()->intended('dashboard');
         }
 
@@ -87,9 +90,13 @@ class LoginController extends Controller
         ]);
     }
 
-    public function logout(){
+    public function logout(Request $request){
         
         Auth::logout();
+
+        $request->session()->invalidate();
+        
+        $request->session()->regenerateToken();
 
         Session::flash('logout', 'You have been successfully logged out.');
 

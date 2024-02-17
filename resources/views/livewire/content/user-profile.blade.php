@@ -78,10 +78,11 @@
                 </form>
             </div>
         </div>
-        <div class="user-profile-box flex-2">
-            <div class="u-box-shadow-default u-bg-white">
+        <div class="user-profile-box flex-2 u-box-shadow-default">
+            <div class=" u-bg-white">
                 <div class="u-p-5">
-                    <form wire:submit="editUser">
+                    <form action="{{ route('update-app-setting', auth()->user()->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+                        @csrf
                         <table class="custom_normal_table">
                             <tbody>
                                 <tr>
@@ -90,7 +91,7 @@
                                             <div class="s-box-sm u-p-10-15 u-border-radius-5 u-mr-5">
                                                 <h3 class="u-t-primary"><i class="fa-solid fa-gear"></i></h3>
                                             </div>
-                                            <h4 class="u-fw-b u-t-dark">Settings</h4>
+                                            <h4 class="u-fw-b u-t-dark">Application Settings</h4>
                                         </div>
                                     </td>
                                 </tr>
@@ -98,39 +99,44 @@
                                     <td>
                                         <p>Dark mode</p>
                                         <select class="u-input" name="dark_mode" required>
-                                            <option value="">False</option>
-                                            <option value="">True</option>
+                                            @if ($user->dark_mode == 'TRUE')
+                                                <option value="TRUE" selected>TRUE</option>
+                                                <option value="FALSE">FALSE</option>
+                                                @else
+                                                <option value="TRUE">TRUE</option>
+                                                <option value="FALSE" selected>FALSE</option>
+                                            @endif
                                         </select>
                                     </td>
                                     <td>
                                         <p>Topbar background color</p>
-                                        <input class="u-input" name="last_name" type="text" placeholder="Enter css code" required>
+                                        <input class="u-input" name="topbar_bg" type="text" value="{{ $app_settings->topbar_bg }}" placeholder="Enter css code" required>
                                     </td>                            
                                 </tr>
                                 <tr>
                                     <td>
                                         <p>Sidebar background color</p>
-                                        <input class="u-input" name="contact" type="text" placeholder="Enter css code" required>
+                                        <input class="u-input" name="sidebar_bg" type="text" value="{{ $app_settings->sidebar_bg }}" placeholder="Enter css code" required>
                                     </td>
                                     <td>
                                         <p>Sidebar logo image</p>
-                                        <input class="u-input" name="email" type="text" placeholder="Enter company name" required>
+                                        <input class="u-input" name="sidebar_img" type="file" accept="image/*">
                                     </td>                         
                                 </tr>
                                 <tr>
                                     <td>
                                         <p>Sidebar company name</p>
-                                        <input class="u-input" type="text" placeholder="Enter company name">
+                                        <input class="u-input" name="sidebar_title" type="text" value="{{ $app_settings->sidebar_title_name }}" placeholder="Enter company name" required>
                                     </td>
                                     <td>
                                         <p>Footer company name</p>
-                                        <input class="u-input" name="email" type="text" placeholder="Enter company name" required>
+                                        <input class="u-input" name="footer_title" type="text" value="{{ $app_settings->footer_company_name }}" placeholder="Enter company name" required>
                                     </td> 
                                 </tr>
                                 <tr>
                                     <td>
                                         <p>Login Background Image</p>
-                                        <input class="u-input" type="file" accept="image/*">
+                                        <input class="u-input" name="login_bg" type="file" accept="image/*">
                                     </td>
                                 </tr>
                             </tbody>
@@ -152,7 +158,7 @@
             toast: true,
             position: "bottom-end",
             showConfirmButton: false,
-            timer: 2000,
+            timer: 3000,
             timerProgressBar: true,
             customClass: {
                 container: 'custom-toast'
@@ -167,5 +173,26 @@
             title: data.message
         });
     });
+
+    if("{{ session('edit-success') }}"){
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "bottom-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            customClass: {
+                container: 'custom-toast'
+            },
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+        }
+        });
+        Toast.fire({
+            icon: "success",
+            title: "{{ session('edit-success') }}"
+        });
+    }
 </script>
 @endscript

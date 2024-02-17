@@ -27,6 +27,7 @@ class User extends Authenticatable
         'status',
         'img',
         'privilege_id',
+        'dark_mode',
         'updated_at',
         'updated_by'
     ];

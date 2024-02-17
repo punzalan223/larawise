@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 // Login
@@ -35,7 +35,9 @@ Route::middleware('auth')->group(function () {
     // Add User
     Route::get('add-user-privilege', [AddUserPrivilegeController::class, 'index']);
     // User Profile
-    Route::get('user-profile', [UserProfileController::class, 'index'])->name('user-profile');
+    Route::get('user-profile/{id}', [UserProfileController::class, 'index'])->name('user-profile');
+    // User App Settings
+    Route::post('update-app-settings/{id}', [UserProfileController::class, 'update'])->name('update-app-setting');
     // Add other authenticated routes here
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\UsersAppSetting;
 use Illuminate\Http\Request;
 
 class UserProfileController extends Controller
@@ -50,8 +52,23 @@ class UserProfileController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
+    {  
+        $user_input = $request->all();
+
+        User::find($id)
+            ->update([
+                'dark_mode' => $user_input['dark_mode']
+            ]);
+
+        UsersAppSetting::first()
+            ->update([
+                'topbar_bg' => $user_input['topbar_bg'],
+                'sidebar_bg' => $user_input['sidebar_bg'],
+                'sidebar_title_name' => $user_input['sidebar_title'],
+                'footer_company_name' => $user_input['footer_title']
+            ]);
+            
+        return redirect()->back()->with('edit-success', 'Settings Updated Sucessfully');
     }
 
     /**

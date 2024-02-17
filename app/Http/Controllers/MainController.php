@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UsersAppSetting;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -11,8 +12,9 @@ class MainController extends Controller
      */
     public function index()
     {
+        $data = [];
         
-        return view('links.dashboard');
+        return view('links.dashboard', $data);
     }
 
     /**
@@ -61,5 +63,12 @@ class MainController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function appSettings()
+    {
+        $app_settings = UsersAppSetting::first();
+
+        return $app_settings;
     }
 }

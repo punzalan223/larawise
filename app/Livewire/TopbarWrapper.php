@@ -2,12 +2,16 @@
 
 namespace App\Livewire;
 
+use App\Models\UsersAppSetting;
 use Livewire\Component;
 
 class TopbarWrapper extends Component
 {
     public function render()
     {
-        return view('livewire.topbar-wrapper');
+        $data = [];
+        $data['app_settings'] = UsersAppSetting::first();
+
+        return view('livewire.topbar-wrapper', $data);
     }
 }

@@ -6,10 +6,10 @@
                     <div class="s-box-sm u-p-10-15 u-border-radius-5">
                         <h2 class="u-t-primary"><i class="fa-solid fa-pen"></i></h2>
                     </div>
-                    <h2 class="u-fw-b u-t-white">132341</h2>
+                    <h2 class="u-fw-b u-t-white">100</h2>
                 </div>
                 <div class="u-flex-end">
-                    <h4 class="u-fw-b u-t-white">Lorem</h4>
+                    <h4 class="u-fw-b u-t-white">Total Users</h4>
                 </div>
                 <div class="u-border-top-1 u-mt-5 u-pt-5">
                     <h5 class="u-t-white"><i class="fa-solid fa-arrow-right"></i> Link</h5>

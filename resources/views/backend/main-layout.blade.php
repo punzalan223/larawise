@@ -16,13 +16,16 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <main x-data="{ initialized: false, showSidenav: true }" x-init="init">
+    <main x-data="{ initialized: false, showSidenav: true, darkMode: false }" x-init="init" :class="darkMode ? 'u-bg-dm-dark' : ''">
         @livewire('sidebar-wrapper')
         @livewire('topbar-wrapper')
     </main>
     <script>
         function init() {
             console.log('Document is ready!');
+
+            this.darkMode = "{{ auth()->user()->dark_mode }}".toUpperCase() === 'FALSE' ? false : true;
+            console.log(this.darkMode);
         }
     </script>
 </body>

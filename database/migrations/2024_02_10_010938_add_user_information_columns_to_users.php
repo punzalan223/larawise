@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('status')->nullable()->after('contact');
             $table->string('privilege_id')->nullable()->after('status');
             $table->string('img')->nullable()->after('privilege_id');
+            $table->string('dark_mode')->nullable()->after('img');
         });
     }
 
@@ -33,6 +34,7 @@ return new class extends Migration
             $table->dropColumn('status');
             $table->dropColumn('privilege_id');
             $table->dropColumn('img');
+            $table->dropColumn('dark_mode');
         });
     }
 };

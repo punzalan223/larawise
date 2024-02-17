@@ -3,6 +3,7 @@
 namespace App\Livewire\Content;
 
 use App\Models\User;
+use App\Models\UsersAppSetting;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Livewire\WithSorting;
@@ -93,6 +94,7 @@ class UserProfile extends Component
 
         $data = [];
         $data['user'] = User::find($auth_id);
+        $data['app_settings'] = UsersAppSetting::first();
 
         $this->user_id = $data['user']->id;
         $this->auth_user_information = $data['user'];

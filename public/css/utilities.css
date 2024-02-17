@@ -168,6 +168,18 @@ h6 {
     background-color: var(--warning);
 }
 
+.u-bg-dm-dark {
+    background-color: #191b21 !important;
+}
+
+.u-bg-dm-l-dark {
+    background-color: #272c36 !important;
+}
+
+.u-t-dm-white {
+    color: #f6f7f9 !important;
+}
+
 .lara-btn {
     padding: 0.625rem;
     cursor: pointer;
@@ -191,6 +203,14 @@ h6 {
 
 .u-p-10-15 {
     padding: 0.625rem 1.6rem;
+}
+
+.u-ptb-10 {
+    padding: 0.625rem 0;
+}
+
+.u-pl-16 {
+    padding-left: 1rem;
 }
 
 .u-mt-5 {
@@ -293,6 +313,10 @@ h6 {
     align-items: center;
 }
 
+.u-j-content-center {
+    justify-content: center;
+}
+
 .u-space-around {
     justify-content: space-around;
 }
@@ -344,6 +368,7 @@ h6 {
     display: flex;
     padding: 1rem;
     z-index: 1;
+    overflow-y: auto;
 }
 
 .modal-box {
@@ -359,8 +384,6 @@ h6 {
 
 .modal-content {
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
     flex-direction: column;
     padding: 20px;
 }
@@ -513,7 +536,7 @@ input::file-selector-button {
 
 /* Statistic box */
 .s-box {
-    min-height: 11rem;
+    min-height: 5rem;
     flex: 1 0 auto; /* Initially, allow items to grow but not shrink */
     width: 15rem;
     min-width: 15rem;
@@ -547,7 +570,6 @@ input::file-selector-button {
     background: linear-gradient(to right, #437e83, #39676a) !important;
     color: #fff;
 }
-
 
 /* Use a media query to apply styles for smaller screens */
 @media only screen and (max-width: 500px) {

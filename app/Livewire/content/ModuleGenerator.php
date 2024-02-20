@@ -21,35 +21,39 @@ class ModuleGenerator extends Component
     // Add
     public $a_module_name = '';
     public $a_controller_name = '';
-    public $a_livewire_blade = '';
     public $a_route_name = '';
     public $a_icon_path = '';
 
     public function clearDataProperties()
     {
-        $this->reset(['a_module_name', 'a_controller_name', 'a_livewire_blade']);
+        $this->reset(['a_module_name', 'a_controller_name', 'a_route_name', 'a_icon_path']);
     }
 
     public function addModule()
     {
         $class_name = Str::studly($this->a_route_name);
 
+        $this->validate([
+            'a_module_name' => 'required|unique:module_generators,name',
+            'a_controller_name' => 'required|unique:module_generators,controller_name',
+            'a_route_name' => 'required|unique:module_generators,route_name',
+        ]);
+
         ModelsModuleGenerator::create([
             'name' => $this->a_module_name,
             'controller_name' => $this->a_controller_name,
-            'livewire_path' => $this->a_livewire_blade,
             'route_name' => $this->a_route_name,
             'icon_img_path' => $this->a_icon_path,
             'controller_path' => "Http/Controllers/Modules/$this->a_controller_name",
             'blade_path' => "views/links/$this->a_route_name.blade.php",
-            'livewire_path' => "views/livewire/content/$this->a_route_name.blade.php",
-            'livewire_controller_path' => "Livewire/content/$class_name.php",
+            'livewire_path' => "views/livewire/module/$this->a_route_name.blade.php",
+            'livewire_controller_path' => "Livewire/livewireModule/$class_name.php",
         ]);
 
-        $this->createFileControllerBlade($this->a_module_name, $this->a_route_name);
-        $this->createFileController($this->a_controller_name, $this->a_livewire_blade);
-        $this->createFileLivewireBlade($this->a_module_name, $this->a_route_name);
-        $this->createFileLivewireBackend($this->a_route_name);
+        // $this->createFileControllerBlade($this->a_module_name, $this->a_route_name);
+        // $this->createFileController($this->a_controller_name, $this->a_route_name);
+        // $this->createFileLivewireBlade($this->a_module_name, $this->a_route_name);
+        // $this->createFileLivewireBackend($this->a_route_name);
 
         $this->dispatch('module-added');
         request()->session()->flash('add-success', 'Module Added Sucessfully');
@@ -86,7 +90,7 @@ class ModuleGenerator extends Component
             @section('title','$module_name')
 
             @section('content')
-                @livewire('content.$route_name')
+                @livewire('livewireModule.$route_name')
             @endsection
             BLADE;
 
@@ -98,7 +102,7 @@ class ModuleGenerator extends Component
     public function createFileLivewireBlade($module_name, $route_name)
     {
         // Define the directory path for the view file
-        $viewDirectory = resource_path("views/livewire/content");
+        $viewDirectory = resource_path("views/livewire/livewireModule");
 
         // Define the file path for the blade view
         $viewPath = $viewDirectory . "/$route_name.blade.php";
@@ -127,7 +131,7 @@ class ModuleGenerator extends Component
         $class_name = Str::studly($route_name);
 
         // Define the directory path for the Livewire component file
-        $livewireDirectory = app_path("Livewire/content");
+        $livewireDirectory = app_path("Livewire/livewireModule");
 
         // Define the file path for the Livewire component
         $livewirePath = $livewireDirectory . "/{$class_name}.php";
@@ -142,7 +146,7 @@ class ModuleGenerator extends Component
             <<<PHP
             <?php
 
-            namespace App\\Livewire\\Content;
+            namespace App\\Livewire\\LivewireModule;
 
             use Livewire\\Component;
 
@@ -150,7 +154,7 @@ class ModuleGenerator extends Component
             {
                 public function render()
                 {
-                    return view('livewire.content.$route_name');
+                    return view('livewire.livewireModule.$route_name');
                 }
             }
             PHP;

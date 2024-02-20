@@ -53,9 +53,6 @@ Route::middleware('auth')->group(function () {
         Route::get($module->route_name, [$controllerNamespace, 'index'])->name($module->route_name);
     }
 
-
-    // Route::get('pre-payment', [CashAdvancedController::class, 'index'])->name('pre-payment');
-
     // Add other authenticated routes here
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });

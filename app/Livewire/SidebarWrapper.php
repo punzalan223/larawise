@@ -8,6 +8,8 @@ use Livewire\Component;
 
 class SidebarWrapper extends Component
 {
+    protected $listeners = ['module-added' => 'moduleAdded'];
+
     public function render()
     {
         $data = [];

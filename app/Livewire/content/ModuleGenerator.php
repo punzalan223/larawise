@@ -30,10 +30,9 @@ class ModuleGenerator extends Component
         $this->reset(['a_module_name', 'a_controller_name', 'a_livewire_blade']);
     }
 
-    public function addModule(){
-
+    public function addModule()
+    {
         $class_name = Str::studly($this->a_route_name);
-
 
         ModelsModuleGenerator::create([
             'name' => $this->a_module_name,
@@ -41,7 +40,7 @@ class ModuleGenerator extends Component
             'livewire_path' => $this->a_livewire_blade,
             'route_name' => $this->a_route_name,
             'icon_img_path' => $this->a_icon_path,
-            'controller_path' => "Http/Controllers/Modules/$class_name",
+            'controller_path' => "Http/Controllers/Modules/$this->a_controller_name",
             'blade_path' => "views/links/$this->a_route_name.blade.php",
             'livewire_path' => "views/livewire/content/$this->a_route_name.blade.php",
             'livewire_controller_path' => "Livewire/content/$class_name.php",
@@ -52,6 +51,7 @@ class ModuleGenerator extends Component
         $this->createFileLivewireBlade($this->a_module_name, $this->a_route_name);
         $this->createFileLivewireBackend($this->a_route_name);
 
+        $this->dispatch('module-added');
         request()->session()->flash('add-success', 'Module Added Sucessfully');
     }
 
@@ -80,14 +80,14 @@ class ModuleGenerator extends Component
             // Write the blade code
             $bladeCode = 
             <<<BLADE
-                @extends('layouts.app')
+            @extends('backend.main-layout')
 
-                {{-- Module Title --}}
-                @section('title','$module_name')
+            {{-- Module Title --}}
+            @section('title','$module_name')
 
-                @section('content')
-                    @livewire('content.$route_name')
-                @endsection
+            @section('content')
+                @livewire('content.$route_name')
+            @endsection
             BLADE;
 
             // Write the blade code to the file
@@ -150,7 +150,7 @@ class ModuleGenerator extends Component
             {
                 public function render()
                 {
-                    return view('livewire.$route_name');
+                    return view('livewire.content.$route_name');
                 }
             }
             PHP;
@@ -163,8 +163,8 @@ class ModuleGenerator extends Component
     public function createFileController($controller, $livewire)
     {
         $class_name = Str::studly($controller);
-        $controller_name = $class_name.'Controller';
-        $controllerPath = app_path("Http/Controllers/Modules/$controller_name");
+        $controller_name = $class_name;
+        $controllerPath = app_path("Http/Controllers/Modules/$controller_name.php");
 
         // Check if the controller file already exists
         if (!File::exists($controllerPath)) {
@@ -179,6 +179,7 @@ class ModuleGenerator extends Component
             namespace App\Http\Controllers\Modules;
 
             use Illuminate\Http\Request;
+            use App\Http\Controllers\Controller;
 
             class {$class_name} extends Controller
             {

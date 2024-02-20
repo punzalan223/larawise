@@ -14,27 +14,27 @@
                             <tr>
                                 <td>
                                     <p>Module name</p>
-                                    <input class="u-input" wire:model="a_module_name" name="first_name" type="text" placeholder="Module name" required>
+                                    <input class="u-input" wire:model="a_module_name" name="first_name" type="text" placeholder="Module name" >
                                 </td>
                                 <td>
                                     <p>Controller Name</p>
-                                    <input class="u-input" wire:model="a_controller_name" name="last_name" type="text" placeholder="Enter controller name" required>
+                                    <input class="u-input" wire:model="a_controller_name" name="last_name" type="text" placeholder="Enter controller name" >
                                 </td>                            
                             </tr>
                             <tr>
                                 <td>
                                     <p>Route Name</p>
-                                    <input class="u-input" wire:model="a_route_name" name="contact" type="text" placeholder="Enter route Name" required>
+                                    <input class="u-input" wire:model="a_route_name" name="contact" type="text" placeholder="Enter route Name" >
                                 </td>
                                 <td>
                                     <p>Livewire Component Name</p>
-                                    <input class="u-input" wire:model="a_livewire_blade" name="contact" type="text" placeholder="Enter livewire component name" required>
+                                    <input class="u-input" wire:model="a_livewire_blade" name="contact" type="text" placeholder="Enter livewire component name" >
                                 </td>
                             </tr> 
                             <tr>
                                 <td>
-                                    <p>Icon Path</p>
-                                    <input class="u-input" wire:model="a_icon_path" name="" type="text" placeholder="Enter the icon filename" required>
+                                    <p>Icon filename</p>
+                                    <input class="u-input" wire:model="a_icon_path" name="" type="text" placeholder="Enter the icon filename" >
                                 </td>
                             </tr>                      
                         </tbody>

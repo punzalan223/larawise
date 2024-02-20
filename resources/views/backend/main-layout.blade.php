@@ -15,7 +15,8 @@
     {{-- Choice JS --}}
     <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
     <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
-
+    {{-- Sweetalert2 --}}
+    <script src="{{ asset('js/sweetalert.js') }}"></script>
 
 </head>
 <body x-data="{ initialized: false, showSidenav: true, darkMode: false }">

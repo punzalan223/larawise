@@ -15,7 +15,7 @@
                 <img src="{{ auth()->user()->img ? asset('storage/img/user-profiles/'.auth()->user()->img) : asset('img/icons/user.png') }}" alt="">
             </div>
             <div class="sidebar-name">
-                <h6 class="u-t-white u-fw-b">{{ auth()->user()->name }}</h6>
+                <h6 class="u-t-white u-fw-b">{{ auth()->user()->first_name }}</h6>
             </div>
         </div>
         <div class="sidebar-modules">
@@ -29,13 +29,17 @@
                         <h5 class="u-fw-b">Dashboard</h6>
                     </a>
                 </li>
-                @foreach ( $modules as $module)
-                <li>
-                    <a class="u-t-white {{ Request::segment(1) == "$module->route_name" ? "url-active" : '' }}" href="{{ url("/$module->route_name") }}" wire:navigate>
-                        <img src="{{ asset("img/icons/$module->icon_img_path") }}" alt="">
-                        <h5 class="u-fw-b">{{ $module->name }}</h6>
-                    </a>
-                </li>
+                @foreach ($modules as $module)
+                    @if($privilege_access)
+                        @if ($privilege_access->privilege_access_id == $module->id)
+                            <li>
+                                <a class="u-t-white {{ Request::segment(1) == "$module->route_name" ? "url-active" : '' }}" href="{{ url("/$module->route_name") }}" wire:navigate>
+                                    <img src="{{ asset("img/icons/$module->icon_img_path") }}" alt="">
+                                    <h5 class="u-fw-b">{{ $module->name }}</h6>
+                                </a>
+                            </li>
+                        @endif
+                    @endif
                 @endforeach
                 <li class="u-ptb-10">
                     <h6 class="u-t-white">Submaster</h6>

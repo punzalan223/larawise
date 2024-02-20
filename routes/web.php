@@ -44,14 +44,14 @@ Route::middleware('auth')->group(function () {
     // User App Settings
     Route::post('update-app-settings/{id}', [UserProfileController::class, 'update'])->name('update-app-setting');
     // Modules
-    // $modules = ModelsModuleGenerator::get();
+    $modules = ModelsModuleGenerator::get();
 
-    // foreach ($modules as $module){
-    //     $controllerPath = $module->controller_path;
-    //     $controllerNamespace = 'App\\' . str_replace('/', '\\', $controllerPath);
+    foreach ($modules as $module){
+        $controllerPath = $module->controller_path;
+        $controllerNamespace = 'App\\' . str_replace('/', '\\', $controllerPath);
 
-    //     Route::get($module->route_name, [$controllerNamespace, 'index'])->name($module->route_name);
-    // }
+        Route::get($module->route_name, [$controllerNamespace, 'index'])->name($module->route_name);
+    }
 
     // Add other authenticated routes here
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');

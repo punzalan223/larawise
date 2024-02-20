@@ -7,6 +7,7 @@ use App\Models\UsersPrivileges;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
 use Livewire\WithPagination;
+use DB;
 
 class AddUserPrivilege extends Component
 {
@@ -19,7 +20,7 @@ class AddUserPrivilege extends Component
     public $paginate = 10;
 
     public $add_privilege_name = '';
-    public $add_privilege_access = '';
+    public $add_privilege_access = [];
     public $add_status = 'ACTIVE';
 
     public $edit_privilege_name = '';
@@ -38,9 +39,14 @@ class AddUserPrivilege extends Component
 
     public function addPrivilege()
     {
-        dd($this->add_privilege_access);
+        // Convert the collection to an array
+        $arr_privileges = $this->add_privilege_access->toArray();
+        // Implode the array values separated by commas
+        $privileges = implode(',', $arr_privileges);
+        
         UsersPrivileges::insert([
             'name' => $this->add_privilege_name,
+            'privilege_access_id' => $privileges,
             'status' => $this->add_status,
             'created_by' => auth()->user()->id,
             'created_at' => date('Y-m-d H:i:s'),
@@ -77,6 +83,9 @@ class AddUserPrivilege extends Component
     {
         $data = [];
         $data['modules'] = ModuleGenerator::where('is_active', 1)->get();
+
+        $this->add_privilege_access = ModuleGenerator::where('is_active', 1)->pluck('id');
+        $this->add_privilege_access->all();
         
         $data['privileges'] = UsersPrivileges::query()
         ->leftJoin('users as created_users', 'created_users.id', 'users_privileges.created_by')

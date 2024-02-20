@@ -47,6 +47,7 @@
                     @endif
                     <div class="u-flex-space-between" x-data="{
                         clearSelectedOptions: function(){
+                            return;
                             // Get all elements with class .ss-value-delete
                             var deleteButtons = document.querySelectorAll('.ss-value-delete');
 
@@ -206,7 +207,6 @@
 <script>
     let mySelect = new SlimSelect({
         select: '#selectElement',
-        hideSelected: true,
     })
 </script>
 @endscript

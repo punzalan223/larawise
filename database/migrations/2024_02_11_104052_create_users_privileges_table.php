@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('status')->nullable();
+            $table->string('privilege_access_id')->nullable();
             $table->integer('created_by')->length(10)->unsigned()->nullable();
             $table->integer('updated_by')->length(10)->unsigned()->nullable();
             $table->timestamps();

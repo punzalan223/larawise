@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('livewire_path')->nullable();
             $table->string('livewire_controller_path')->nullable();
             $table->string('is_active')->nullable();
+            $table->string('privilege_access_id')->nullable();
             $table->integer('created_by')->length(10)->unsigned()->nullable();
             $table->integer('updated_by')->length(10)->unsigned()->nullable();
             $table->timestamps();
@@ -37,3 +38,5 @@ return new class extends Migration
         Schema::dropIfExists('module_generators');
     }
 };
+
+

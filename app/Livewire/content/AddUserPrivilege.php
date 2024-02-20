@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Content;
 
+use App\Models\ModuleGenerator;
 use App\Models\UsersPrivileges;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
@@ -18,6 +19,7 @@ class AddUserPrivilege extends Component
     public $paginate = 10;
 
     public $add_privilege_name = '';
+    public $add_privilege_access = '';
     public $add_status = 'ACTIVE';
 
     public $edit_privilege_name = '';
@@ -25,7 +27,7 @@ class AddUserPrivilege extends Component
 
     public function clearDataProperties()
     {
-        $this->reset(['add_privilege_name', 'add_status']);
+        $this->reset(['add_privilege_name', 'add_privilege_access', 'add_status']);
         $this->reset(['edit_privilege_name', 'edit_status', 'privilege_data']);
     }
 
@@ -36,6 +38,7 @@ class AddUserPrivilege extends Component
 
     public function addPrivilege()
     {
+        dd($this->add_privilege_access);
         UsersPrivileges::insert([
             'name' => $this->add_privilege_name,
             'status' => $this->add_status,
@@ -72,6 +75,9 @@ class AddUserPrivilege extends Component
 
     public function render()
     {
+        $data = [];
+        $data['modules'] = ModuleGenerator::where('is_active', 1)->get();
+        
         $data['privileges'] = UsersPrivileges::query()
         ->leftJoin('users as created_users', 'created_users.id', 'users_privileges.created_by')
         ->leftJoin('users as updated_users', 'updated_users.id', 'users_privileges.updated_by')

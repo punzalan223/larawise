@@ -77,7 +77,7 @@
 
 @script
 <script>
-    Livewire.on('module-added', () => {
+    Livewire.on('module-added, edit-success', () => {
         // Trigger Livewire method to handle the event
         Livewire.emit('module-added');
     });

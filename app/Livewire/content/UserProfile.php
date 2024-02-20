@@ -84,7 +84,7 @@ class UserProfile extends Component
             // Store the uploaded photo in the public directory
             $this->e_photo->storePubliclyAs("img/user-profiles", $file_name, 'public');
 
-            $message = 'Profile image updated. Refresh page to see changes';
+            $message = 'Profile image updated successfully.';
         }
 
         $this->clearDataProperties();

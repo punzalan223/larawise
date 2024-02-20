@@ -571,6 +571,10 @@ input::file-selector-button {
     color: #fff;
 }
 
+.ss-main:focus{
+    box-shadow: none !important;
+}
+
 /* Use a media query to apply styles for smaller screens */
 @media only screen and (max-width: 500px) {
     /* Set the table row (tr) to be displayed as a block */

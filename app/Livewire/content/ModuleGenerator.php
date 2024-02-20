@@ -15,6 +15,8 @@ class ModuleGenerator extends Component
     use WithPagination;
     use WithFileUploads;
 
+    public $editModuleData;
+
     public $paginate = 10;
     public $search = '';
 
@@ -27,6 +29,7 @@ class ModuleGenerator extends Component
     public function clearDataProperties()
     {
         $this->reset(['a_module_name', 'a_controller_name', 'a_route_name', 'a_icon_path']);
+        $this->resetErrorBag();
     }
 
     public function addModule()
@@ -46,8 +49,10 @@ class ModuleGenerator extends Component
             'icon_img_path' => $this->a_icon_path,
             'controller_path' => "Http/Controllers/Modules/$this->a_controller_name",
             'blade_path' => "views/links/$this->a_route_name.blade.php",
-            'livewire_path' => "views/livewire/module/$this->a_route_name.blade.php",
+            'livewire_path' => "views/livewire/livewireModule/$this->a_route_name.blade.php",
             'livewire_controller_path' => "Livewire/livewireModule/$class_name.php",
+            'is_active' => 1,
+            'created_by' => auth()->user()->id
         ]);
 
         // $this->createFileControllerBlade($this->a_module_name, $this->a_route_name);
@@ -57,6 +62,16 @@ class ModuleGenerator extends Component
 
         $this->dispatch('module-added');
         request()->session()->flash('add-success', 'Module Added Sucessfully');
+    }
+
+    public function editModule()
+    {
+
+    }
+
+    public function viewModule($moduleId)
+    {
+        dd($moduleId);
     }
 
     public function render()

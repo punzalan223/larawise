@@ -1,7 +1,7 @@
 <div x-data="{ showModalAddPrivilege: false, showModalEditPrivilege: false, showModalViewPrivilege: false }">
 
     <div class="modal-center" x-show="showModalAddPrivilege" style="display: none;">
-        <div class="modal-box" @click.outside="showModalAddPrivilege = false; $wire.clearMessageSession(); $wire.clearDataProperties()">
+        <div class="modal-box" @click.outside="$wire.clearMessageSession()">
             <div class="modal-content">
                 <form wire:submit="addPrivilege">
                     @csrf
@@ -18,6 +18,16 @@
                                     <input class="u-input" wire:model="add_privilege_name" name="add_privilege_name" type="text" placeholder="Enter privilege name" required>
                                 </td>                          
                             </tr>
+                            <tr wire:ignore>
+                                <td>
+                                    <p>Privilege Module Access</p>
+                                    <select class="u-input" wire:model="add_privilege_access" id="selectElement" multiple>
+                                        @foreach ($modules as $module)
+                                            <option value="{{ $module->id }}" selected>{{ $module->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                     <p>Status</p>
@@ -27,6 +37,7 @@
                                     </select>
                                 </td>  
                             </tr>
+                            
                         </tbody>
                     </table>
                     @if(session('add-success'))
@@ -34,8 +45,18 @@
                         <h5>✅ {{ session('add-success') }}</h5>
                     </div>
                     @endif
-                    <div class="u-flex-space-between">
-                        <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-m-10 u-border-1-default" type="button" @click="showModalAddPrivilege = false; $wire.clearMessageSession()">Close</button>
+                    <div class="u-flex-space-between" x-data="{
+                        clearSelectedOptions: function(){
+                            // Get all elements with class .ss-value-delete
+                            var deleteButtons = document.querySelectorAll('.ss-value-delete');
+
+                            // Trigger click event on each delete button
+                            deleteButtons.forEach(function(button) {
+                                button.click();
+                            });
+                        }
+                    }">
+                        <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-m-10 u-border-1-default" type="button" @click="showModalAddPrivilege = false; clearSelectedOptions(); $wire.clearDataProperties(); $wire.clearMessageSession()">Close</button>
                         <button class="u-t-white u-fw-b u-btn u-bg-primary u-m-10 u-border-1-default" type="submit">Submit</button>
                     </div>
                 </form>
@@ -178,4 +199,16 @@
                 {{ $privileges->firstItem() }} to {{ $privileges->lastItem() }} of {{ $privileges->total() }}
             </h5>
         </div>
-    </div></div>
+    </div>
+</div>
+
+@script
+<script>
+    let mySelect = new SlimSelect({
+        select: '#selectElement',
+        hideSelected: true,
+    })
+</script>
+@endscript
+
+

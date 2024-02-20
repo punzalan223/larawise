@@ -12,8 +12,11 @@
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/utilities.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main-layout/main.css') }}">
-    {{-- Sweetalert2 --}}
-    <script src="{{ asset('js/sweetalert.js') }}"></script>
+    {{-- Choice JS --}}
+    <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
+    <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
+
+
 </head>
 <body x-data="{ initialized: false, showSidenav: true, darkMode: false }">
 
@@ -32,8 +35,10 @@
             console.log('Document is ready!');
 
             this.darkMode = "{{ auth()->user()->dark_mode }}".toUpperCase() === 'FALSE' ? false : true;
-            console.log(this.darkMode);
+
+            
         }
+
     </script>
 </body>
 </html>

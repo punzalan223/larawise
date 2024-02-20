@@ -8,7 +8,10 @@ use Livewire\Component;
 
 class SidebarWrapper extends Component
 {
-    protected $listeners = ['module-added' => 'moduleAdded'];
+    protected $listeners = [
+        'module-added' => 'moduleAdded',
+        'edit-success' => 'profileUpdated'
+    ];
 
     public function render()
     {

@@ -14,31 +14,38 @@
                             <tr>
                                 <td>
                                     <p>Module name</p>
-                                    <input class="u-input" wire:model="a_module_name" name="first_name" type="text" placeholder="Module name" >
+                                    <input class="u-input" wire:model="a_module_name" name="first_name" type="text" placeholder="Module name" required>
                                 </td>
                                 <td>
                                     <p>Controller Name</p>
-                                    <input class="u-input" wire:model="a_controller_name" name="last_name" type="text" placeholder="Enter controller name" >
+                                    <input class="u-input" wire:model="a_controller_name" name="last_name" type="text" placeholder="Enter controller name" required>
                                 </td>                            
                             </tr>
                             <tr>
                                 <td>
                                     <p>Route Name</p>
-                                    <input class="u-input" wire:model="a_route_name" name="contact" type="text" placeholder="Enter route Name" >
+                                    <input class="u-input" wire:model="a_route_name" name="contact" type="text" placeholder="Enter route Name" required>
                                 </td>
-                                <td>
-                                    <p>Livewire Component Name</p>
-                                    <input class="u-input" wire:model="a_livewire_blade" name="contact" type="text" placeholder="Enter livewire component name" >
-                                </td>
-                            </tr> 
-                            <tr>
                                 <td>
                                     <p>Icon filename</p>
-                                    <input class="u-input" wire:model="a_icon_path" name="" type="text" placeholder="Enter the icon filename" >
+                                    <input class="u-input" wire:model="a_icon_path" name="" type="text" placeholder="Enter the icon filename" required>
                                 </td>
-                            </tr>                      
+                            </tr> 
                         </tbody>
                     </table>
+                    @if($errors->hasAny(['a_module_name', 'a_controller_name', 'a_route_name']))
+                        <div class="u-m-10 u-bg-danger u-p-10 u-fw-b u-t-white">
+                            @error('a_module_name')
+                                <h5>⚠️ {{ $message }}</h5>
+                            @enderror
+                            @error('a_controller_name')
+                                <h5>⚠️ {{ $message }}</h5>
+                            @enderror
+                            @error('a_route_name')
+                                <h5>⚠️ {{ $message }}</h5>
+                            @enderror
+                        </div>
+                    @endif
                     @if(session('add-success'))
                         <div class="u-m-10 u-bg-success u-p-10 u-fw-b u-t-white">
                             <h5>✅ {{ session('add-success') }}</h5>
@@ -75,10 +82,10 @@
                 <td>ID</td>
                 <td>Name</td>
                 <td>Controller Name</td>
-                <td>Icon img path</td>
+                <td>Icon filename</td>
                 <td>Route Name</td>
-                <td>Livewire Blade</td>
-                <td>Livewire Controller</td>
+                <td>Created by</td>
+                <td>Created at</td>
                 <td>Action</td>
             </tr>
             @foreach ($modules as $module)
@@ -88,17 +95,12 @@
                     <td>{{ $module->controller_name }}</td>
                     <td>{{ $module->icon_img_path }}</td>
                     <td>{{ $module->route_name }}</td>
-                    <td>{{ $module->livewire_blade }}</td>
-                    <td>{{ $module->livewire_controller }}</td>
+                    <td>{{ $module->created_by }}</td>
+                    <td>{{ $module->created_at }}</td>
                     <td>
                         <div class="action-btns">
-                            <button class="action-btn u-bg-primary u-t-white" wire:click="viewUser({{ $module->id }})" @click="showModalEditUser = true;" type="button"><i class="fa-solid fa-pencil"></i></button>
-                            <button class="action-btn u-bg-warning u-t-white" wire:click="viewUser({{ $module->id }})" @click="showModalViewUser = true;" type="buton"><i class="fa-regular fa-eye"></i></button>
-                            @if ($module->status == 'ACTIVE')
-                            <button class="action-btn u-bg-danger u-t-white" wire:click="inactiveUser({{ $module->id }})" type="button"><i class="fa-solid fa-xmark"></i></button>
-                            @else
-                            <button wire:click="activeUser({{ $module->id }})" class="action-btn u-bg-success u-t-white" type="button"><i class="fa-solid fa-check"></i></button>
-                            @endif
+                            <button class="action-btn u-bg-primary u-t-white" wire:click="viewModule({{ $module->id }})" @click="showModalEditUser = true;" type="button"><i class="fa-solid fa-pencil"></i></button>
+                            <button class="action-btn u-bg-warning u-t-white" wire:click="viewModule({{ $module->id }})" @click="showModalViewUser = true;" type="buton"><i class="fa-regular fa-eye"></i></button>
                         </div>
                     </td>
                 </tr>

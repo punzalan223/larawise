@@ -1,5 +1,5 @@
 <div class="topbar">
-    <div class="topbar-box u-flex-space-between" :class="darkMode ? 'u-bg-dm-l-dark' : ''" style='{{ $app_settings->topbar_bg ? "background: $app_settings->topbar_bg" : '' }}'>
+    <div class="topbar-box u-flex-space-between" :class="(darkMode ? 'u-bg-dm-l-dark' : '') + (!showSidenav ? ' topbar-sticky' : '')" style='{{ $app_settings->topbar_bg ? "background: $app_settings->topbar_bg" : '' }}'>
         <div class="topbar-box-content">
             <h4 @click="showSidenav = !showSidenav"><i class="fa-solid fa-bars" :class="darkMode ? 'u-t-dm-white' : ''"></i></h4>
         </div>
@@ -16,7 +16,7 @@
                         <h6 class="u-t-white">SuperAdmin</h6>
                     </div>
                     <div class="user-profile-actions u-flex-center-row">
-                        <a class="u-btn u-t-white u-bg-primary" style="margin-right: 5px;" href="{{ route('user-profile', auth()->user()->id) }}">Profile</a>
+                        <a class="u-btn u-t-white u-bg-primary" wire:navigate style="margin-right: 5px;" href="{{ route('user-profile', auth()->user()->id) }}">Profile</a>
                         <a class="u-btn u-t-white u-bg-danger" style="margin-left: 5px;" href="{{ route('logout') }}">Logout</a>
                     </div>
                 </div>

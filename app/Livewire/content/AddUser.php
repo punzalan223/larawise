@@ -50,8 +50,7 @@ class AddUser extends Component
     public function clearDataProperties()
     {
         $this->reset(['first_name', 'last_name', 'contact', 'email', 'password', 'password_confirmation']);
-        $this->reset(['e_password', 'e_password_confirmation']);
-
+        $this->reset(['e_first_name', 'e_last_name', 'e_contact', 'e_email', 'e_password', 'e_password_confirmation']);
         $this->resetErrorBag();
     }
     
@@ -115,6 +114,8 @@ class AddUser extends Component
             User::find($this->userId)->update([
                 "password" => Hash::make($this->e_password)
             ]);
+
+            $this->reset(['e_password', 'e_password_confirmation']);
         }
 
         request()->session()->flash('edit-success', 'User Updated Successfully');
@@ -133,7 +134,6 @@ class AddUser extends Component
         $this->editUserData = User::find($userId);
         $this->userId = $userId;
     
-        // Set form input values if editUserData is not null
         if ($this->editUserData) {
             $this->e_first_name = $this->editUserData->first_name;
             $this->e_last_name = $this->editUserData->last_name;

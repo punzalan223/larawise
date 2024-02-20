@@ -4,7 +4,9 @@ use App\Http\Controllers\AddUserController;
 use App\Http\Controllers\AddUserPrivilegeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\ModuleGeneratorController;
 use App\Http\Controllers\UserProfileController;
+use App\Livewire\ModuleGenerator;
 use Illuminate\Support\Facades\Route;
 
 
@@ -36,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('add-user-privilege', [AddUserPrivilegeController::class, 'index']);
     // User Profile
     Route::get('user-profile/{id}', [UserProfileController::class, 'index'])->name('user-profile');
+    // Module Generator
+    Route::get('module-generator', [ModuleGeneratorController::class, 'index'])->name('module-generator');
     // User App Settings
     Route::post('update-app-settings/{id}', [UserProfileController::class, 'update'])->name('update-app-setting');
     // Add other authenticated routes here

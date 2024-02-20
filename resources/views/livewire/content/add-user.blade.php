@@ -1,7 +1,7 @@
 <div class="u-mt-10" x-data="{ showModalAddUser: false, showModalEditUser: false, showModalViewUser: false }">
     
     <div class="modal-center" x-show="showModalAddUser" style="display: none;">
-        <div class="modal-box" @click.outside="showModalAddUser = false">
+        <div class="modal-box" @click.outside="showModalAddUser = false; $wire.clearDataProperties();">
             <div class="modal-content">
                 <form wire:submit="addUser">
                     @csrf
@@ -69,7 +69,7 @@
                         </div>
                     @endif
                     <div class="u-flex-space-between">
-                        <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-m-10 u-border-1-default" type="button" @click="showModalAddUser = false">Close</button>
+                        <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-m-10 u-border-1-default" @click="showModalAddUser = false; $wire.clearDataProperties();" type="button">Close</button>
                         <button class="u-t-white u-fw-b u-btn u-bg-primary u-m-10 u-border-1-default" type="submit">Submit</button>
                     </div>
                 </form>
@@ -78,7 +78,7 @@
     </div>
 
     <div class="modal-center" x-show="showModalEditUser" style="display: none;">
-        <div class="modal-box" @click.outside="showModalEditUser = false; $wire.clearDataProperties()">
+        <div class="modal-box" @click.outside="showModalEditUser = false; $wire.clearDataProperties();">
             <div class="modal-content">
                 <form wire:submit="editUser">
                     @csrf
@@ -92,21 +92,21 @@
                             <tr>
                                 <td>
                                     <p>First name</p>
-                                    <input class="u-input" wire:model="e_first_name" @if($editUserData) value="{{ $editUserData->first_name }}" @endif name="first_name" type="text" placeholder="Enter first name" required>
+                                    <input class="u-input" wire:model="e_first_name" name="first_name" type="text" placeholder="Enter first name" required>
                                 </td>
                                 <td>
                                     <p>Last Name</p>
-                                    <input class="u-input" wire:model="e_last_name" @if($editUserData) value="{{ $editUserData->last_name }}" @endif name="last_name" type="text" placeholder="Enter last name" required>
+                                    <input class="u-input" wire:model="e_last_name" name="last_name" type="text" placeholder="Enter last name" required>
                                 </td>                            
                             </tr>
                             <tr>
                                 <td>
                                     <p>Contact</p>
-                                    <input class="u-input" wire:model="e_contact" @if($editUserData) value="{{ $editUserData->contact }}" @endif name="contact" type="text" placeholder="Enter contact number" required>
+                                    <input class="u-input" wire:model="e_contact" name="contact" type="text" placeholder="Enter contact number" required>
                                 </td>
                                 <td>
                                     <p>Email</p>
-                                    <input class="u-input" wire:model="e_email" @if($editUserData) value="{{ $editUserData->email }}" @endif name="email" type="text" placeholder="Enter email" required>
+                                    <input class="u-input" wire:model="e_email" name="email" type="text" placeholder="Enter email" required>
                                 </td>                            
                             </tr>
                             <tr>
@@ -147,7 +147,7 @@
                         </div>
                     @endif
                     <div class="u-flex-space-between">
-                        <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-m-10 u-border-1-default" type="button" @click="showModalEditUser = false">Close</button>
+                        <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-m-10 u-border-1-default" type="button" @click="showModalEditUser = false; $wire.clearDataProperties();">Close</button>
                         <button class="u-t-white u-fw-b u-btn u-bg-primary u-m-10 u-border-1-default" type="submit">Submit</button>
                     </div>
                 </form>
@@ -190,7 +190,7 @@
                         </tbody>
                     </table>
                     <div class="u-flex-space-between">
-                        <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-m-10 u-border-1-default" type="button" @click="showModalViewUser = false">Close</button>
+                        <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-m-10 u-border-1-default" type="button" @click="showModalViewUser = false; $wire.clearDataProperties();">Close</button>
                     </div>
                 </form>
             </div>
@@ -237,12 +237,12 @@
                     <td>{{ $user->created_at }}</td>
                     <td>
                         <div class="action-btns">
-                            <button wire:click="viewUser({{ $user->id }})" @click="showModalEditUser = true; $wire.clearDataProperties()" class="action-btn u-bg-primary u-t-white" type="button"><i class="fa-solid fa-pencil"></i></button>
-                            <button wire:click="viewUser({{ $user->id }})" @click="showModalViewUser = true; $wire.clearDataProperties()" class="action-btn u-bg-warning u-t-white"><i class="fa-regular fa-eye"></i></button>
+                            <button class="action-btn u-bg-primary u-t-white" wire:click="viewUser({{ $user->id }})" @click="showModalEditUser = true;" type="button"><i class="fa-solid fa-pencil"></i></button>
+                            <button class="action-btn u-bg-warning u-t-white" wire:click="viewUser({{ $user->id }})" @click="showModalViewUser = true;" type="buton"><i class="fa-regular fa-eye"></i></button>
                             @if ($user->status == 'ACTIVE')
-                            <button wire:click="inactiveUser({{ $user->id }})" class="action-btn u-bg-danger u-t-white"><i class="fa-solid fa-xmark"></i></button>
+                            <button class="action-btn u-bg-danger u-t-white" wire:click="inactiveUser({{ $user->id }})" type="button"><i class="fa-solid fa-xmark"></i></button>
                             @else
-                            <button wire:click="activeUser({{ $user->id }})" class="action-btn u-bg-success u-t-white"><i class="fa-solid fa-check"></i></button>
+                            <button wire:click="activeUser({{ $user->id }})" class="action-btn u-bg-success u-t-white" type="button"><i class="fa-solid fa-check"></i></button>
                             @endif
                         </div>
                     </td>

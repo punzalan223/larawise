@@ -78,6 +78,7 @@
                 </form>
             </div>
         </div>
+        
         <div class="user-profile-box flex-2 u-box-shadow-default">
             <div class=" u-bg-white">
                 <div class="u-p-5">

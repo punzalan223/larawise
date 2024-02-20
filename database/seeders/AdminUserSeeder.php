@@ -14,7 +14,8 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::updateOrInsert([
+        User::updateOrInsert(['name' => 'Patrick Lester Punzalan'],
+            [
             'name' => 'Patrick Lester Punzalan',
             'first_name' => 'Patrick Lester',
             'last_name' => 'Punzalan',
@@ -25,7 +26,8 @@ class AdminUserSeeder extends Seeder
             'created_by' => 1,
         ]);
 
-        User::updateOrInsert([
+        User::updateOrInsert(['name' => 'Fillinor Gunio'],
+            [
             'name' => 'Fillinor Gunio',
             'first_name' => 'Fillinor',
             'last_name' => 'Gunio',

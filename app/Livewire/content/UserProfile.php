@@ -27,6 +27,10 @@ class UserProfile extends Component
     public $e_password_confirmation = '';
     public $e_photo;
 
+    public function clearDataProperties(){
+        $this->reset(['e_first_name', 'e_last_name', 'e_contact', 'e_email', 'e_password', 'e_password_confirmation', 'e_photo']);
+    }
+
     public function editUser()
     {
         $user = User::find($this->user_id);
@@ -83,7 +87,7 @@ class UserProfile extends Component
             $message = 'Profile image updated. Refresh page to see changes';
         }
 
-        $this->reset(['e_password', 'e_password_confirmation']);
+        $this->clearDataProperties();
         
         $this->dispatch('edit-success', message: $message);
     }

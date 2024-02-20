@@ -13,10 +13,17 @@
     <link rel="stylesheet" href="{{ asset('css/utilities.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main-layout/main.css') }}">
     {{-- Sweetalert2 --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/sweetalert.js') }}"></script>
 </head>
-<body>
-    <main x-data="{ initialized: false, showSidenav: true, darkMode: false }" x-init="init" :class="darkMode ? 'u-bg-dm-dark' : ''">
+<body x-data="{ initialized: false, showSidenav: true, darkMode: false }">
+
+    <div class="sidebarHW u-box-shadow-default">
+        <div class="sidebarMenu" @click="showSidenav = !showSidenav" x-show="showSidenav" x-transition.duration.300ms>
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </div>
+
+    <main x-init="init" :class="darkMode ? 'u-bg-dm-dark' : ''">
         @livewire('sidebar-wrapper')
         @livewire('topbar-wrapper')
     </main>

@@ -14,6 +14,7 @@
     margin: auto;
     position: relative;
     border: 1px solid rgb(255, 255, 255);
+    overflow: hidden;
 }
 
 .glass-card::before {
@@ -35,22 +36,22 @@
 .login-input{
     display: flex;
     flex-direction: column;
-    margin: 25px 0;
+    margin: 10px 0;
 }
 
-.login-input input{
+/* .login-input input{
     border: none;
     border-bottom: 2px solid #008080;
     color: #001F3F;
     background-color: transparent;
     padding: 15px 0;
     font-size: 1rem;
-}
+} */
 
-.login-input input:focus{
+/* .login-input input:focus{
     outline: none;
     border-bottom: 2px solid #a63309;
-}
+} */
 
 .login-input input::placeholder{
     color: #7c7171;
@@ -59,7 +60,6 @@
 
 #login-btn{
     width: 100%;
-    background: #008080;
     border: none;
     font-size: 1rem;
 }

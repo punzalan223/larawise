@@ -5,6 +5,7 @@ use App\Http\Controllers\AddUserPrivilegeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ModuleGeneratorController;
+use App\Http\Controllers\UserLogController;
 use App\Http\Controllers\UserProfileController;
 use App\Livewire\ModuleGenerator;
 use App\Models\ModuleGenerator as ModelsModuleGenerator;
@@ -39,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('add-user-privilege', [AddUserPrivilegeController::class, 'index']);
     // User Profile
     Route::get('user-profile/{id}', [UserProfileController::class, 'index'])->name('user-profile');
+    // User Logs
+    Route::get('user-logs', [UserLogController::class, 'index'])->name('user-log');
     // Module Generator
     Route::get('module-generator', [ModuleGeneratorController::class, 'index'])->name('module-generator');
     // User App Settings
@@ -46,13 +49,14 @@ Route::middleware('auth')->group(function () {
     // Modules
     $modules = ModelsModuleGenerator::get();
 
-    foreach ($modules as $module){
-        $controllerPath = $module->controller_path;
-        $controllerNamespace = 'App\\' . str_replace('/', '\\', $controllerPath);
-
-        Route::get($module->route_name, [$controllerNamespace, 'index'])->name($module->route_name);
+    if($modules){
+        foreach ($modules as $module){
+            $controllerPath = $module->controller_path;
+            $controllerNamespace = 'App\\' . str_replace('/', '\\', $controllerPath);
+    
+            Route::get($module->route_name, [$controllerNamespace, 'index'])->name($module->route_name);
+        }
     }
-
     // Add other authenticated routes here
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });

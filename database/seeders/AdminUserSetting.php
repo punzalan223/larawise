@@ -16,7 +16,7 @@ class AdminUserSetting extends Seeder
         UsersAppSetting::updateOrInsert([
             'dark_mode' => 'FALSE',
             'topbar_bg' => '#fff',
-            'sidebar_bg' => 'linear-gradient(to bottom, #000000, #39676a)',
+            'sidebar_bg' => '#474E68',
             'sidebar_title_name' => 'Larawise',
             'footer_company_name' => 'Larawise'
         ]);

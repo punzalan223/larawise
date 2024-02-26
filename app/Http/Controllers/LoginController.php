@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserLog;
 use App\Models\UsersAppSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,11 +77,19 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
-        
+
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             $request->session()->put('app_settings', UsersAppSetting::first());
+
+            UserLog::create([
+                'ip_address' => $request->ip(),
+                'useragent' => $request->userAgent(),
+                'description' => 'User login',
+                'id_users' => auth()->user()->id,
+                'created_at' => now()
+            ]);
 
             return redirect()->intended('dashboard');
         }

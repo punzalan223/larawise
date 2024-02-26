@@ -15,7 +15,7 @@
                 <img src="{{ auth()->user()->img ? asset('storage/img/user-profiles/'.auth()->user()->img) : asset('img/icons/user.png') }}" alt="">
             </div>
             <div class="sidebar-name">
-                <h6 class="u-t-white u-fw-b">{{ auth()->user()->first_name }}</h6>
+                <h6 class="u-t-white u-fw-b">{{ auth()->user()->name }}</h6>
             </div>
         </div>
         <div class="sidebar-modules">
@@ -60,10 +60,6 @@
                             <img src="{{ asset('img/icons/monitor.png') }}" alt="">
                             <h6 class="">Add privilege</h6>
                         </a>
-                        <a class="u-t-white u-pl-16 {{ Request::segment(1) == 'edit-user-privilege' ? 'url-active' : '' }}" wire:navigate href="{{ url('/add-user-privilege') }}">
-                            <img src="{{ asset('img/icons/monitor.png') }}" alt="">
-                            <h6 class="">Edit privilege</h6>
-                        </a>
                     </div>
                     <a class="u-t-white {{ Request::segment(1) == 'add-user' ? 'url-active' : '' }}" wire:navigate href="{{ url('/add-user') }}">
                         <img src="{{ asset('img/icons/user-profiles.png') }}" alt="">
@@ -72,6 +68,10 @@
                     <a class="u-t-white {{ Request::segment(1) == 'module-generator' ? 'url-active' : '' }}" wire:navigate href="{{ url('/module-generator') }}">
                         <img src="{{ asset('img/icons/pencil.png') }}" alt="">
                         <h5 class="u-fw-b">Module Generator</h5>
+                    </a>
+                    <a class="u-t-white {{ Request::segment(1) == 'user-logs' ? 'url-active' : '' }}" wire:navigate href="{{ url('/user-logs') }}">
+                        <img src="{{ asset('img/icons/log.png') }}" alt="">
+                        <h5 class="u-fw-b">Logs</h5>
                     </a>
                 </li>
             </ul>

@@ -254,7 +254,7 @@
     <div class="u-flex-space-between u-flex-wrap">
         {{ $users->links('livewire::default') }}
         <div class="u-flex-alignIt-center">
-            <h5>
+            <h5 :class="(darkMode ? 'u-t-white' : '')">
                 Showing record(s) :
                 {{ $users->firstItem() }} to {{ $users->lastItem() }} of {{ $users->total() }}
             </h5>

@@ -47,7 +47,7 @@
 }
 
 html {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 html,
@@ -128,6 +128,10 @@ h6 {
     color: var(--warning);
 }
 
+.u-bg-blue{
+    background-color: var(--blue);
+}
+
 .u-t-center {
     text-align: center;
 }
@@ -169,7 +173,7 @@ h6 {
 }
 
 .u-bg-dm-dark {
-    background-color: #191b21 !important;
+    background-color: #35374B !important;
 }
 
 .u-bg-dm-l-dark {
@@ -361,7 +365,7 @@ h6 {
 .modal-center {
     height: 100vh;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.75);
     position: fixed;
     top: 0;
     left: 0;
@@ -375,7 +379,7 @@ h6 {
     margin: auto;
     min-height: auto;
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
@@ -469,7 +473,7 @@ h6 {
 }
 
 .u-input {
-    height: 2.5rem;
+    height: 2.8rem;
     width: 100%;
     border: 1px solid transparent;
     padding: 0 10px;
@@ -482,7 +486,7 @@ h6 {
 }
 
 input::file-selector-button {
-    margin: 0.4rem;
+    margin: 0.6rem;
 }
 
 .u-input:focus {
@@ -541,7 +545,7 @@ input::file-selector-button {
     width: 15rem;
     min-width: 15rem;
     border-radius: 5px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.5), inset 0px 1px 0px rgba(255, 255, 255, 0.1);
     overflow: hidden;
 }
 
@@ -567,7 +571,7 @@ input::file-selector-button {
 }
 
 .swal2-toast {
-    background: linear-gradient(to right, #437e83, #39676a) !important;
+    background: var(--accent-color) !important;
     color: #fff;
 }
 
@@ -606,8 +610,8 @@ input::file-selector-button {
     }
 }
 
-@media only screen and (max-width: 1800px) {
+/* @media only screen and (max-width: 1800px) {
     html {
         font-size: 13.6px;
     }
-}
+} */

@@ -83,6 +83,16 @@
                                     <input class="u-input" wire:model="edit_privilege_name" name="edit_privilege_name" type="text" placeholder="Enter privilege name" required>
                                 </td>                          
                             </tr>
+                            <tr wire:ignore>
+                                <td>
+                                    <p>Privilege Module Access</p>
+                                    <select class="u-input" wire:model="add_privilege_access" id="selectElement1" multiple>
+                                        @foreach ($modules as $module)
+                                            <option value="{{ $module->id }}" selected>{{ $module->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                     <p>Status</p>
@@ -195,7 +205,7 @@
     <div class="u-flex-space-between u-flex-wrap">
         {{ $privileges->links('livewire::default') }}
         <div class="u-flex-alignIt-center">
-            <h5>
+            <h5 :class="(darkMode ? 'u-t-white' : '')">
                 Showing record(s) :
                 {{ $privileges->firstItem() }} to {{ $privileges->lastItem() }} of {{ $privileges->total() }}
             </h5>
@@ -207,6 +217,10 @@
 <script>
     let mySelect = new SlimSelect({
         select: '#selectElement',
+    })
+
+    let mySelect1 = new SlimSelect({
+        select: '#selectElement1',
     })
 </script>
 @endscript

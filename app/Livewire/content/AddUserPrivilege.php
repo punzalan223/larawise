@@ -25,6 +25,7 @@ class AddUserPrivilege extends Component
 
     public $edit_privilege_name = '';
     public $edit_status = '';
+    public $edit_privilege_access = [];
 
     public function clearDataProperties()
     {
@@ -88,15 +89,15 @@ class AddUserPrivilege extends Component
         $this->add_privilege_access->all();
         
         $data['privileges'] = UsersPrivileges::query()
-        ->leftJoin('users as created_users', 'created_users.id', 'users_privileges.created_by')
-        ->leftJoin('users as updated_users', 'updated_users.id', 'users_privileges.updated_by')
-        ->select('users_privileges.*', 'created_users.name as created_by', 'updated_users.name as updated_by')
-        ->where(function ($query) {
-            $query->orWhere('users_privileges.name', 'like', '%' . $this->search . '%')
-                ->orWhere('users_privileges.status', 'like', '%' . $this->search . '%');
-        })
-        ->orderBy('users_privileges.id', 'asc')
-        ->paginate($this->paginate);
+            ->leftJoin('users as created_users', 'created_users.id', 'users_privileges.created_by')
+            ->leftJoin('users as updated_users', 'updated_users.id', 'users_privileges.updated_by')
+            ->select('users_privileges.*', 'created_users.name as created_by', 'updated_users.name as updated_by')
+            ->where(function ($query) {
+                $query->orWhere('users_privileges.name', 'like', '%' . $this->search . '%')
+                    ->orWhere('users_privileges.status', 'like', '%' . $this->search . '%');
+            })
+            ->orderBy('users_privileges.id', 'asc')
+            ->paginate($this->paginate);
     
         return view('livewire.content.add-user-privilege', $data);
     }

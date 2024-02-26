@@ -16,8 +16,8 @@
         <table class="u-responsive-table">
             <tr class="u-fw-b">
                 <td>IP address</td>
-                <td>useragent</td>
-                <td>description</td>
+                <td>Useragent</td>
+                <td>Description</td>
                 <td>User</td>
                 <td>Created At</td>
             </tr>

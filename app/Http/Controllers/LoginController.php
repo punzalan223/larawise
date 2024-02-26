@@ -91,7 +91,7 @@ class LoginController extends Controller
                 'created_at' => now()
             ]);
 
-            return redirect()->intended('dashboard');
+            return redirect()->intended('dashboard')->with('login-success', 'Your success message here');
         }
 
         return back()->withErrors([

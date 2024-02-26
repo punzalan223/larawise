@@ -21,6 +21,23 @@
 </head>
 <body x-data="{ initialized: false, showSidenav: true, darkMode: false }">
 
+    @if (session('login-success'))
+        <div class="modal-center" x-data="{showModalTaC: true}" x-show="showModalTaC" style="z-index: 2">
+            <div class="modal-box">
+                <div class="modal-content">
+                    <h4 class="u-fw-b">Terms and Conditions</h6>
+                        <div class="u-mt-15">
+                            <h5>Lorem ipsuwpariatur iste quidem error dolores facere, quod, facilis voluptates quae praesentium suscipit rerum quis et sapiente aliquid maiores aperiam reiciendis iusto doloribus iure quisquam at. Aspernatur, dignissimos. A quo officia accusamus, eos nemo voluptates quaerat dolorem eveniet molestias, similique libero.</h5>
+                            <h5 class="u-mt-15">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, commodi vero, ipsam perspiciatis mollitia animi, rerum sequi voluptatum blanditiis id accusantium facere laboriosam est veritatis.</h5>
+                        </div>
+                        <div class="u-flex-space-between">
+                            <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-mt-15 u-border-1-default" type="button" @click="showModalTaC = false; ">Close</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="sidebarHW u-box-shadow-default">
         <div class="sidebarMenu" @click="showSidenav = !showSidenav" x-show="showSidenav" x-transition.duration.300ms>
             <i class="fa-solid fa-bars"></i>

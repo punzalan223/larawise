@@ -44,6 +44,9 @@
                 <li class="u-ptb-10">
                     <h6 class="u-t-white">Submaster</h6>
                 </li>
+                <li class="u-ptb-10">
+                    <h6 class="u-t-white">Admin</h6>
+                </li>
                 <li x-data="{ dropdown: $persist(false).using(sessionStorage), dropdownPrivileges: $persist(false).using(sessionStorage) }">
                     {{-- <div class="sidebar-dropdown">
                         <a class="u-t-white" @click="dropdown = !dropdown;">

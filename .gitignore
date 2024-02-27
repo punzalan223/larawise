@@ -4,6 +4,8 @@
 /public/hot
 /public/storage
 /public/img/user-profiles
+/public/img/logo
+/public/img/background
 /storage/*.key
 /vendor
 .env

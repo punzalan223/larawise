@@ -2,7 +2,7 @@
     <a href="{{ url('/dashboard') }}" class="sidebar-logo">
         <div class="sidebar-logo-content">
             <div>
-                <img src="{{ asset('img/digits-assets/digits-icon.png') }}" alt="" id="store-logo-img">
+                <img src="{{ asset("img/logo/$app_settings->sidebar_logo_img") }}"" alt="" id="store-logo-img">
             </div>
             <div class="company-name">
                 <h4 class="u-t-center u-t-white u-fw-b">{{ $app_settings->sidebar_title_name ? $app_settings->sidebar_title_name : 'Larawise'}}</h4>

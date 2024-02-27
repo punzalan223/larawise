@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-    <img src="{{ asset('img/bg.jpg') }}" alt="" style="height: 100%; width: 100%; position: fixed; z-index: -1; object-fit: cover; background-repeat: no-repeat; ">
+    <img src="{{ $app_settings->login_bg_img ? asset("img/background/$app_settings->login_bg_img") : asset("img/bg.jpg") }}" alt="" style="height: 100%; width: 100%; position: fixed; z-index: -1; object-fit: cover; background-repeat: no-repeat; ">
     <section class="login-section">
         <div class="glass-card">
             <div class="glass-img">

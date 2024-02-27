@@ -19,8 +19,11 @@ class LoginController extends Controller
             // If user is already authenticated, redirect to dashboard
             return redirect()->route('dashboard');
         }
+
+        $data = [];
+        $data['app_settings'] = UsersAppSetting::first();
         
-        return view('login.login');
+        return view('login.login', $data);
     }
 
     /**

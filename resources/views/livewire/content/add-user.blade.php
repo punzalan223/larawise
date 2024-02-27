@@ -211,8 +211,8 @@
             <button class="u-t-white u-fw-b u-btn u-bg-primary u-mr-5" type="button" id="export"><i class="fa-solid fa-download"></i> Export</button>
         </div>
         <div class="u-flex">
-            <button class="u-t-gray-dark u-fw-b u-inputs u-mr-5" style="width: 15rem;" type="button" id="export"><i class="fa-solid fa-filter"></i> Sort & Filter</button>
-            <input class="u-input" style="max-width: 15.635rem;" wire:model.live="search" type="text" placeholder="Search">
+            <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-mr-5 u-box-shadow-default" style="min-width: 10rem" type="button" id="export"><i class="fa-solid fa-filter"></i> Sort & Filter</button>
+            <input class="u-input" style="width: 100%; max-width: 20rem;" wire:model.live="search" type="text" placeholder="Search">
         </div>
 
     </div>

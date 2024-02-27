@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('sidebar_bg')->nullable();
             $table->string('sidebar_logo_img')->nullable();
             $table->string('sidebar_title_name')->nullable();
+            $table->string('login_bg_img')->nullable();
             $table->string('footer_company_name')->nullable();
             $table->integer('created_by')->length(10)->unsigned()->nullable();
             $table->integer('updated_by')->length(10)->unsigned()->nullable();

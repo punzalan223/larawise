@@ -21,10 +21,14 @@
                             <tr wire:ignore>
                                 <td>
                                     <p>Privilege Module Access</p>
-                                    <select class="u-input" wire:model="add_privilege_access" id="selectElement" multiple>
-                                        @foreach ($modules as $module)
+                                    <select class="u-input u-select2" wire:model="add_privilege_access1" id="selectElement" multiple>
+                                        <option value="1">Test1</option>
+                                        <option value="2">Test2</option>
+                                        <option value="3">Test3</option>
+                                        <option value="4">Test4</option>
+                                        {{-- @foreach ($modules as $module)
                                             <option value="{{ $module->id }}" selected>{{ $module->name }}</option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 </td>
                             </tr>
@@ -86,11 +90,11 @@
                             <tr wire:ignore>
                                 <td>
                                     <p>Privilege Module Access</p>
-                                    <select class="u-input" wire:model="add_privilege_access" id="selectElement1" multiple>
+                                    {{-- <select class="u-input" wire:model="add_privilege_access" id="selectElement1" multiple>
                                         @foreach ($modules as $module)
                                             <option value="{{ $module->id }}" selected>{{ $module->name }}</option>
                                         @endforeach
-                                    </select>
+                                    </select> --}}
                                 </td>
                             </tr>
                             <tr>
@@ -215,13 +219,17 @@
 
 @script
 <script>
-    let mySelect = new SlimSelect({
-        select: '#selectElement',
+    $(document).ready(() => {
+        $('.u-select2').select2({
+            width: '100%'
+        }).on('change', function(){
+            let data = $(this).val();
+            console.log(data);
+
+            $wire.set('add_privilege_access', data)
+        })
     })
 
-    let mySelect1 = new SlimSelect({
-        select: '#selectElement1',
-    })
 </script>
 @endscript
 

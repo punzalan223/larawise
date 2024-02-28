@@ -77,7 +77,7 @@
         </div>
     </div>
 
-    <div class="modal-center" wshowModalEditUser" style="display: none;">
+    <div class="modal-center" x-show="showModalEditUser" style="display: none;">
         <div class="modal-box" @click.outside="showModalEditUser = false; $wire.clearDataProperties();">
             <div class="modal-content">
                 <form wire:submit="editUser">

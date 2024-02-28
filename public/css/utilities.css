@@ -128,7 +128,7 @@ h6 {
     color: var(--warning);
 }
 
-.u-bg-blue{
+.u-bg-blue {
     background-color: var(--blue);
 }
 
@@ -173,7 +173,7 @@ h6 {
 }
 
 .u-bg-dm-dark {
-    background-color: #35374B !important;
+    background-color: #35374b !important;
 }
 
 .u-bg-dm-l-dark {
@@ -493,6 +493,51 @@ input::file-selector-button {
     border: 2px solid #16abbc;
 }
 
+/* Select2 Design */
+
+.select2-selection {
+    height: 2.7rem !important;
+    border-radius: 5px !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 30px 0 10px !important;
+    position: relative;
+    border: none !important;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;
+    border: 1px solid #ddd !important;
+    font-size: 1rem !important;
+}
+
+.select2-search__field {
+    padding: 0.5rem !important;
+    font-size: 1rem !important;
+}
+
+.select2-selection__arrow {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+}
+
+.select2-container--open .select2-selection {
+    border: 2px solid #16abbc !important;
+}
+
+.select2-container--focus .select2-selection {
+    border: 1px solid #ddd !important;
+}
+
+.select2-selection:focus {
+    border: 2px solid #16abbc !important; /* Set the focus border color */
+    outline: 0 !important; /* Remove default browser outline */
+}
+
+.select2-container--default
+    .select2-selection--multiple
+    .select2-selection__choice {
+    margin-top: 0 !important;
+}
+
 .u-responsive-table {
     border-collapse: collapse;
     width: 100%;
@@ -545,7 +590,8 @@ input::file-selector-button {
     width: 15rem;
     min-width: 15rem;
     border-radius: 5px;
-    box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.5), inset 0px 1px 0px rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.5),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.1);
     overflow: hidden;
 }
 
@@ -575,7 +621,7 @@ input::file-selector-button {
     color: #fff;
 }
 
-.ss-main:focus{
+.ss-main:focus {
     box-shadow: none !important;
 }
 

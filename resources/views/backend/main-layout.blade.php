@@ -17,7 +17,12 @@
     <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
     {{-- Sweetalert2 --}}
     <script src="{{ asset('js/sweetalert.js') }}"></script>
-
+    {{-- Jquery --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    {{-- Select2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
 </head>
 <body x-data="{ initialized: false, showSidenav: true, darkMode: false }">
 

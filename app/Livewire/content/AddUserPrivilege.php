@@ -40,6 +40,7 @@ class AddUserPrivilege extends Component
 
     public function addPrivilege()
     {
+        dd($this->add_privilege_access);
         // Convert the collection to an array
         $arr_privileges = $this->add_privilege_access->toArray();
         // Implode the array values separated by commas

@@ -18,6 +18,7 @@ class AddUserPrivilege extends Component
 
     public $search = '';
     public $paginate = 10;
+    public $privilege_access_list = [];
 
     public $add_privilege_name = '';
     public $add_privilege_access = [];
@@ -40,11 +41,8 @@ class AddUserPrivilege extends Component
 
     public function addPrivilege()
     {
-        dd($this->add_privilege_access);
-        // Convert the collection to an array
-        $arr_privileges = $this->add_privilege_access->toArray();
         // Implode the array values separated by commas
-        $privileges = implode(',', $arr_privileges);
+        $privileges = implode(',', $this->add_privilege_access);
         
         UsersPrivileges::insert([
             'name' => $this->add_privilege_name,
@@ -86,8 +84,8 @@ class AddUserPrivilege extends Component
         $data = [];
         $data['modules'] = ModuleGenerator::where('is_active', 1)->get();
 
-        $this->add_privilege_access = ModuleGenerator::where('is_active', 1)->pluck('id');
-        $this->add_privilege_access->all();
+        $this->privilege_access_list = ModuleGenerator::where('is_active', 1)->pluck('id');
+        $this->privilege_access_list->all();
         
         $data['privileges'] = UsersPrivileges::query()
             ->leftJoin('users as created_users', 'created_users.id', 'users_privileges.created_by')

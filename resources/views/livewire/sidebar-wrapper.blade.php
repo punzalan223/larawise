@@ -31,7 +31,7 @@
                 </li>
                 @foreach ($modules as $module)
                     @if($privilege_access)
-                        @if ($privilege_access->privilege_access_id == $module->id)
+                        @if (in_array($module->id, explode(',',$privilege_access->privilege_access_id)))
                             <li>
                                 <a class="u-t-white {{ Request::segment(1) == "$module->route_name" ? "url-active" : '' }}" href="{{ url("/$module->route_name") }}" wire:navigate>
                                     <img src="{{ asset("img/icons/$module->icon_img_path") }}" alt="">

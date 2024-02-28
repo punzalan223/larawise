@@ -495,6 +495,7 @@ input::file-selector-button {
 
 /* Select2 Design */
 
+/* Style for single selection */
 .select2-selection {
     height: 2.7rem !important;
     border-radius: 5px !important;
@@ -508,35 +509,39 @@ input::file-selector-button {
     font-size: 1rem !important;
 }
 
+/* Style for search field */
 .select2-search__field {
     padding: 0.5rem !important;
     font-size: 1rem !important;
 }
 
+/* Style for arrow */
 .select2-selection__arrow {
     display: flex !important;
     align-items: center !important;
     height: 100% !important;
 }
 
+/* Style for open state */
 .select2-container--open .select2-selection {
     border: 2px solid #16abbc !important;
 }
 
+/* Style for focus state - single selection */
 .select2-container--focus .select2-selection {
     border: 1px solid #ddd !important;
 }
 
-.select2-selection:focus {
-    border: 2px solid #16abbc !important; /* Set the focus border color */
-    outline: 0 !important; /* Remove default browser outline */
+/* Style for focus state - multiple selection */
+.select2-container--focus .select2-selection--multiple {
+    border: 2px solid #16abbc !important;
 }
 
-.select2-container--default
-    .select2-selection--multiple
-    .select2-selection__choice {
+/* Style for choice in multiple selection */
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
     margin-top: 0 !important;
 }
+
 
 .u-responsive-table {
     border-collapse: collapse;

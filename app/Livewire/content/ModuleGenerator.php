@@ -71,7 +71,6 @@ class ModuleGenerator extends Component
 
     public function viewModule($moduleId)
     {
-        dd($moduleId);
     }
 
     public function render()

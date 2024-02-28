@@ -538,10 +538,21 @@ input::file-selector-button {
 }
 
 /* Style for choice in multiple selection */
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
+.select2-container--default
+    .select2-selection--multiple
+    .select2-selection__choice {
+    margin-left: 0 !important;
+    margin-right: 5px !important;
     margin-top: 0 !important;
 }
 
+.select2-selection__choice {
+    background-color: transparent !important; /* Change to your desired background color */
+    color: #797979 !important; /* Change to your desired text color */
+    border: 1px solid #16abbc !important; /* Change to your desired border color */
+    border-radius: 3px !important;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;
+}
 
 .u-responsive-table {
     border-collapse: collapse;
@@ -595,9 +606,8 @@ input::file-selector-button {
     width: 15rem;
     min-width: 15rem;
     border-radius: 5px;
-    box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.5),
-        inset 0px 1px 0px rgba(255, 255, 255, 0.1);
     overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .s-box-sm {

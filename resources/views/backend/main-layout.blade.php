@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Larawise</title>
     {{-- Favicon --}}
-    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}">
+    {{-- <link rel="icon" type="image/x-icon" href="{{ asset("img/logo/$main_app_settings->sidebar_logo_img") }}"> --}}
     {{-- Font Awesome --}}
     <script src="https://kit.fontawesome.com/358f25eac2.js" crossorigin="anonymous"></script>
     {{-- CSS --}}
@@ -55,13 +55,8 @@
     </main>
     <script>
         function init() {
-            console.log('Document is ready!');
-
-            this.darkMode = "{{ auth()->user()->dark_mode }}".toUpperCase() === 'FALSE' ? false : true;
-
-            
+            this.darkMode = "{{ auth()->user()->dark_mode }}".toUpperCase() === 'FALSE' ? false : true;            
         }
-
     </script>
 </body>
 </html>

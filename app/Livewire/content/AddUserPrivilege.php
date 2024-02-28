@@ -30,8 +30,8 @@ class AddUserPrivilege extends Component
 
     public function clearDataProperties()
     {
-        $this->reset(['add_privilege_name', 'add_privilege_access', 'add_status']);
-        $this->reset(['edit_privilege_name', 'edit_status', 'privilege_data']);
+        $this->reset(['add_privilege_name', 'add_privilege_access', 'add_status', 'add_privilege_access']);
+        $this->reset(['edit_privilege_name', 'edit_status', 'privilege_data', 'edit_privilege_access']);
     }
 
     public function clearMessageSession()
@@ -60,23 +60,31 @@ class AddUserPrivilege extends Component
 
     public function editPrivilege()
     {
+
+        $privileges = implode(',', $this->edit_privilege_access);
+
         UsersPrivileges::find($this->privilege_data->id)
             ->update([
                 'name' => $this->edit_privilege_name,
+                'privilege_access_id' => $privileges,
                 'status' => $this->edit_status,
                 'updated_by' => auth()->user()->id,
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);
 
         request()->session()->flash('edit-success', 'Privilege Edited Sucessfully');
-        
     }
 
     public function viewPrivilege($privilegeId)
     {
         $this->privilege_data = UsersPrivileges::find($privilegeId);
+        // Explode the comma-separated string into an array
+        $this->edit_privilege_access = explode(',', $this->privilege_data->privilege_access_id);
+        // $this->edit_privilege_access = explode(',', $this->privilege_data->privilege_access_id);
         $this->edit_privilege_name = $this->privilege_data->name;
         $this->edit_status = $this->privilege_data->status;
+
+        $this->dispatch('view-success', message: $this->edit_privilege_access);
     }
 
     public function render()
@@ -86,7 +94,7 @@ class AddUserPrivilege extends Component
 
         $this->privilege_access_list = ModuleGenerator::where('is_active', 1)->pluck('id');
         $this->privilege_access_list->all();
-        
+
         $data['privileges'] = UsersPrivileges::query()
             ->leftJoin('users as created_users', 'created_users.id', 'users_privileges.created_by')
             ->leftJoin('users as updated_users', 'updated_users.id', 'users_privileges.updated_by')

@@ -21,9 +21,9 @@
                             <tr wire:ignore>
                                 <td>
                                     <p>Privilege Module Access</p>
-                                    <select class="u-input u-select2" wire:model="add_privilege_access" id="selectElement" multiple>
+                                    <select class="u-input u-select2" wire:model="add_privilege_access" id="add-select2" multiple>
                                         @foreach ($modules as $module)
-                                            <option value="{{ $module->id }}" selected>{{ $module->name }}</option>
+                                            <option value="{{ $module->id }}">{{ $module->name }}</option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -32,7 +32,7 @@
                                 <td>
                                     <p>Status</p>
                                     <select class="u-input" wire:model="add_status" name="add_status" id="status" required>
-                                        <option value="ACTIVE" selected>ACTIVE</option>
+                                        <option value="ACTIVE">ACTIVE</option>
                                         <option value="INACTIVE">INACTIVE</option>
                                     </select>
                                 </td>  
@@ -85,11 +85,13 @@
                             </tr>
                             <tr wire:ignore>
                                 <td>
-                                    <p>Privilege Module Access</p>
-                                    <select class="u-input" wire:model="add_privilege_access" id="selectElement1" multiple>
-                                        @foreach ($modules as $module)
-                                            <option value="{{ $module->id }}" selected>{{ $module->name }}</option>
-                                        @endforeach
+                                <p>Privilege Module Access</p>
+                                    <select class="u-input u-edit-select2" wire:model="edit_privilege_access" id="edit-select2" multiple>
+                                        {{-- @foreach ($modules as $module)
+                                            <option value="{{ $module->id }}">{{ $module->name }}</option>
+                                        @endforeach --}}
+                                        <option value="1">Test1</option>
+                                        <option value="2">Test2</option>
                                     </select>
                                 </td>
                             </tr>
@@ -194,7 +196,7 @@
                     <td>{{ $privilege->updated_at }}</td>
                     <td>
                         <div class="action-btns">
-                            <button wire:click="viewPrivilege({{ $privilege->id }})" @click="showModalEditPrivilege = true;" class="action-btn u-bg-primary u-t-white" type="button"><i class="fa-solid fa-pencil"></i></button>
+                            <button id="test" wire:click="viewPrivilege({{ $privilege->id }})" @click="showModalEditPrivilege = true;" class="action-btn u-bg-primary u-t-white" type="button"><i class="fa-solid fa-pencil"></i></button>
                             <button wire:click="viewPrivilege({{ $privilege->id }})" @click="showModalViewPrivilege = true;" class="action-btn u-bg-warning u-t-white"><i class="fa-regular fa-eye"></i></button>
                         </div>
                     </td>
@@ -216,11 +218,28 @@
 @script
 <script>
     $(document).ready(() => {
-        $('.u-select2').select2({
+        $('.u-select2, .u-edit-select2').select2({
             width: '100%'
-        }).on('change', function(){
+        })
+
+    $wire.on('view-success', (data) => {
+        data.message.forEach((value) => {
+            $('.u-edit-select2 option[value="' + value + '"]').prop('selected', true);
+        });
+
+        $('.u-edit-select2').trigger('change');
+    });
+
+
+        $('#add-select2').on('change', function(){
             let data = $(this).val();
+            console.log(data);
             $wire.set('add_privilege_access', data)
+        })
+
+        $('#edit-select2').on('change', function(){
+            let data = $(this).val();
+            $wire.set('edit_privilege_access', data)
         })
     })
 

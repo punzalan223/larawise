@@ -3,6 +3,7 @@
 namespace App\Livewire\Content;
 
 use App\Models\User;
+use App\Models\UsersPrivileges;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Hash;
@@ -155,6 +156,7 @@ class AddUser extends Component
             ->orWhere('status', 'like', '%' . $this->search . '%')
             ->orderBy('id', 'asc')
             ->paginate($this->paginate);
+        $data['privileges'] = UsersPrivileges::get();
 
         return view('livewire.content.add-user', $data);
     }

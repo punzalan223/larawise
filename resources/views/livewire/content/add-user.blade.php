@@ -1,7 +1,7 @@
 <div class="u-mt-10" x-data="{ showModalAddUser: false, showModalEditUser: false, showModalViewUser: false }">
-    
     <div class="modal-center" x-show="showModalAddUser" style="display: none;">
-        <div class="modal-box" @click.outside="showModalAddUser = false; $wire.clearDataProperties();">
+        <div class="modal-box" 
+            @click.outside="showModalAddUser = false; $wire.clearDataProperties();">
             <div class="modal-content">
                 <form wire:submit="addUser">
                     @csrf
@@ -119,6 +119,16 @@
                                     <input class="u-input" wire:model="e_password_confirmation" name="password_confirmation" type="password" placeholder="Enter confirm password">
                                 </td>                            
                             </tr>
+                            <tr>
+                                <td>
+                                    <p>Privilege</p>
+                                    <select class="u-input" name="" id="">
+                                        @foreach ($privileges as  $privilege)
+                                            <option value="{{ $privilege->id }}">{{ $privilege->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     
@@ -211,7 +221,7 @@
             <button class="u-t-white u-fw-b u-btn u-bg-primary u-mr-5" type="button" id="export"><i class="fa-solid fa-download"></i> Export</button>
         </div>
         <div class="u-flex">
-            <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-mr-5 u-box-shadow-default" style="min-width: 10rem" type="button" id="export"><i class="fa-solid fa-filter"></i> Sort & Filter</button>
+            <button class="u-t-gray-dark u-fw-b u-btn u-bg-white u-mr-5 u-box-shadow-default" style="min-width: 10rem" type="button" id="export"><i class="fa-solid fa-filter"></i> Sort & Filter</button>
             <input class="u-input" style="width: 100%; max-width: 20rem;" wire:model.live="search" type="text" placeholder="Search">
         </div>
 

@@ -79,12 +79,12 @@
             </div>
         </div>
         
-        <div class="user-profile-box flex-2 u-box-shadow-default">
-            <div class=" u-bg-white">
+        <div class="user-profile-box flex-2">
+            <div class="">
                 <div class="u-p-5">
                     <form action="{{ route('update-app-setting', auth()->user()->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                         @csrf
-                        <table class="custom_normal_table">
+                        <table class="custom_normal_table u-box-shadow-default u-bg-white">
                             <tbody>
                                 <tr>
                                     <td>
@@ -114,37 +114,43 @@
                                         <input class="u-input" name="topbar_bg" type="text" value="{{ $app_settings->topbar_bg }}" placeholder="Enter css code" required>
                                     </td>                            
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <p>Sidebar background color</p>
-                                        <input class="u-input" name="sidebar_bg" type="text" value="{{ $app_settings->sidebar_bg }}" placeholder="Enter css code" required>
-                                    </td>
-                                    <td>
-                                        <p>Sidebar logo image</p>
-                                        <input class="u-input" name="sidebar_img" type="file" accept="image/*">
-                                    </td>                         
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>Sidebar company name</p>
-                                        <input class="u-input" name="sidebar_title" type="text" value="{{ $app_settings->sidebar_title_name }}" placeholder="Enter company name" required>
-                                    </td>
-                                    <td>
-                                        <p>Footer company name</p>
-                                        <input class="u-input" name="footer_title" type="text" value="{{ $app_settings->footer_company_name }}" placeholder="Enter company name" required>
-                                    </td> 
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>Login Background Image</p>
-                                        <input class="u-input" name="login_bg" type="file" accept="image/*">
-                                    </td>
-                                </tr>
+                                @if (auth()->user()->privilege_id == 1)
+                                    <tr>
+                                        <td>
+                                            <p>Sidebar background color</p>
+                                            <input class="u-input" name="sidebar_bg" type="text" value="{{ $app_settings->sidebar_bg }}" placeholder="Enter css code" required>
+                                        </td>
+                                        <td>
+                                            <p>Sidebar logo image</p>
+                                            <input class="u-input" name="sidebar_img" type="file" accept="image/*">
+                                        </td>                         
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Sidebar company name</p>
+                                            <input class="u-input" name="sidebar_title" type="text" value="{{ $app_settings->sidebar_title_name }}" placeholder="Enter company name" required>
+                                        </td>
+                                        <td>
+                                            <p>Footer company name</p>
+                                            <input class="u-input" name="footer_title" type="text" value="{{ $app_settings->footer_company_name }}" placeholder="Enter company name" required>
+                                        </td> 
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Login Background Image</p>
+                                            <input class="u-input" name="login_bg" type="file" accept="image/*">
+                                        </td>
+                                        <td>
+                                            <p style="visibility: hidden;">Action</p>
+                                            <div class="u-flex-end">
+                                                <button class="u-t-white u-fw-b u-btn u-bg-primary u-border-1-default" type="submit"><i class="fa-solid fa-gear"></i> Submit</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
-                        <div class="u-flex-end u-mb-5">
-                            <button class="u-t-white u-fw-b u-btn u-bg-primary u-m-10 u-border-1-default" type="submit"><i class="fa-solid fa-gear"></i> Submit</button>
-                        </div>
+
                     </form>
                 </div>
             </div>

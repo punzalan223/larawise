@@ -95,8 +95,9 @@ class AddUser extends Component
             $rules['e_email'] .= '|unique:users';
         }
 
-        if($this->e_password){
+        if($this->e_password || $this->e_password_confirmation){
             $rules['e_password'] = 'required|min:4|confirmed';
+            $rules['e_password_confirmation'] = 'required';
         }
         
         $this->validate($rules);

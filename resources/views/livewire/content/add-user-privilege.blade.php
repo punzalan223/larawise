@@ -222,18 +222,16 @@
             width: '100%'
         })
 
-    $wire.on('view-success', (data) => {
-        data.message.forEach((value) => {
-            $('.u-edit-select2 option[value="' + value + '"]').prop('selected', true);
+        $wire.on('view-success', (data) => {
+            data.message.forEach((value) => {
+                $('.u-edit-select2 option[value="' + value + '"]').prop('selected', true);
+            });
+
+            $('.u-edit-select2').trigger('change');
         });
-
-        $('.u-edit-select2').trigger('change');
-    });
-
 
         $('#add-select2').on('change', function(){
             let data = $(this).val();
-            console.log(data);
             $wire.set('add_privilege_access', data)
         })
 

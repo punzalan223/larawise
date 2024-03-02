@@ -132,7 +132,7 @@
                         </tbody>
                     </table>
                     
-                    @if($errors->hasAny(['e_first_name', 'e_last_name', 'e_contact', 'e_email', 'e_password']))
+                    @if($errors->hasAny(['e_first_name', 'e_last_name', 'e_contact', 'e_email', 'e_password', 'e_password_confirmation']))
                         <div class="u-m-10 u-bg-danger u-p-10 u-fw-b u-t-white">
                             @error('e_first_name')
                                 <h5>⚠️ {{ $message }}</h5>

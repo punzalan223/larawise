@@ -1,7 +1,7 @@
 <div x-data="{ showModalAddPrivilege: false, showModalEditPrivilege: false, showModalViewPrivilege: false }">
 
     <div class="modal-center" x-show="showModalAddPrivilege" style="display: none;">
-        <div class="modal-box" @click.outside="$wire.clearMessageSession()">
+        <div class="modal-box" @click.outside="showModalAddPrivilege = false; $wire.clearMessageSession()">
             <div class="modal-content">
                 <form wire:submit="addPrivilege">
                     @csrf

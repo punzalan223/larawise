@@ -12,7 +12,7 @@
     <div class="sidebar-body">
         <div class="sidebar-user">
             <div class="sidebar-profile-content">
-                <img src="{{ auth()->user()->img ? asset('storage/img/user-profiles/'.auth()->user()->img) : asset('img/icons/user.png') }}" alt="">
+                <img src="{{ $lw_user->img ? asset('img/user-profiles/' . $lw_user->img) : asset('img/icons/user.png') }}" alt="">
             </div>
             <div class="sidebar-name">
                 <h6 class="u-t-white u-fw-b">{{ auth()->user()->name }}</h6>
@@ -82,11 +82,3 @@
     </div>
 </div>
 
-@script
-<script>
-    Livewire.on('module-added, edit-success', () => {
-        // Trigger Livewire method to handle the event
-        Livewire.emit('module-added');
-    });
-</script>
-@endscript

@@ -12,9 +12,6 @@
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/utilities.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main-layout/main.css') }}">
-    {{-- Choice JS --}}
-    <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
-    <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
     {{-- Sweetalert2 --}}
     <script src="{{ asset('js/sweetalert.js') }}"></script>
     {{-- Jquery --}}

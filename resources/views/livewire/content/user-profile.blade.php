@@ -18,37 +18,37 @@
                             <tr>
                                 <td>
                                     <p>First name</p>
-                                    <input class="u-input" wire:model="e_first_name" name="first_name" type="text" placeholder="Enter first name" required>
+                                    <input class="u-input" wire:model="e_first_name" type="text" placeholder="Enter first name" required>
                                 </td>
                                 <td>
                                     <p>Last Name</p>
-                                    <input class="u-input" wire:model="e_last_name" name="last_name" type="text" placeholder="Enter last name" required>
+                                    <input class="u-input" wire:model="e_last_name" type="text" placeholder="Enter last name" required>
                                 </td>                            
                             </tr>
                             <tr>
                                 <td>
                                     <p>Contact</p>
-                                    <input class="u-input" wire:model="e_contact" name="contact" type="text" placeholder="Enter contact number" required>
+                                    <input class="u-input" wire:model="e_contact" type="text" placeholder="Enter contact number" required>
                                 </td>
                                 <td>
                                     <p>Email</p>
-                                    <input class="u-input" wire:model="e_email" name="email" type="text" placeholder="Enter email" disabled>
+                                    <input class="u-input" wire:model="e_email" type="text" placeholder="Enter email" disabled>
                                 </td>                            
                             </tr>
                             <tr>
                                 <td>
                                     <p>Password</p>
-                                    <input class="u-input" wire:model="e_password" name="password" type="password" placeholder="Enter password">
+                                    <input class="u-input" wire:model="e_password" type="password" placeholder="Enter password">
                                 </td>
                                 <td>
                                     <p>Confirm Password</p>
-                                    <input class="u-input" wire:model="e_password_confirmation" name="password_confirmation" type="password" placeholder="Enter confirm password">
+                                    <input class="u-input" wire:model="e_password_confirmation" type="password" placeholder="Enter confirm password">
                                 </td>                            
                             </tr>
                             <tr>
                                 <td>
                                     <p>Change Profile Picture</p>
-                                    <input class="u-input" wire:model="e_photo" type="file" accept="image/*">
+                                    <input class="u-input" id="profile-picture" wire:model="e_img" type="file" accept="image/*">
                                 </td>
                             </tr>
                         </tbody>
@@ -150,7 +150,6 @@
                                 @endif
                             </tbody>
                         </table>
-
                     </form>
                 </div>
             </div>
@@ -160,7 +159,10 @@
 
 @script
 <script>
-    $wire.on('edit-success', (data) => {
+    $wire.on('refreshComponent', (data) => {
+        $wire.clearDataProperties()
+        $('#profile-picture').val('');
+
         const Toast = Swal.mixin({
             toast: true,
             position: "bottom-end",

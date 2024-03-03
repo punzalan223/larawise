@@ -41,42 +41,38 @@
                         @endif
                     @endif
                 @endforeach
-                <li class="u-ptb-10">
-                    <h6 class="u-t-white">Submaster</h6>
-                </li>
-                <li class="u-ptb-10">
-                    <h6 class="u-t-white">Admin</h6>
-                </li>
-                <li x-data="{ dropdown: $persist(false).using(sessionStorage), dropdownPrivileges: $persist(false).using(sessionStorage) }">
-                    {{-- <div class="sidebar-dropdown">
-                        <a class="u-t-white" @click="dropdown = !dropdown;">
-                            <img src="{{ asset('img/icons/list.png') }}" alt="">
-                            <h5 class="u-fw-b">Submaster</h5>
+                @if (auth()->user()->privilege_id == 1)
+                    <li class="u-ptb-10">
+                        <h6 class="u-t-white">Submaster</h6>
+                    </li>
+                    <li class="u-ptb-10">
+                        <h6 class="u-t-white">Admin</h6>
+                    </li>
+                    <li x-data="{ dropdown: $persist(false).using(sessionStorage), dropdownPrivileges: $persist(false).using(sessionStorage) }">
+                        <a class="u-t-white" @click="dropdownPrivileges= !dropdownPrivileges;">
+                            <img src="{{ asset('img/icons/take-note.png') }}" alt="">
+                            <h5 class="u-fw-b">Privileges</h5>
                         </a>
-                    </div> --}}
-                    <a class="u-t-white" @click="dropdownPrivileges= !dropdownPrivileges;">
-                        <img src="{{ asset('img/icons/take-note.png') }}" alt="">
-                        <h5 class="u-fw-b">Privileges</h5>
-                    </a>
-                    <div x-show="dropdownPrivileges" x-transition.duration.300ms style="display: none; background-color: #dddddd15; border-radius: 5px;">
-                        <a class="u-t-white u-pl-16 {{ Request::segment(1) == 'add-user-privilege' ? 'url-active' : '' }}" wire:navigate href="{{ url('/add-user-privilege') }}">
-                            <img src="{{ asset('img/icons/monitor.png') }}" alt="">
-                            <h6 class="">Add privilege</h6>
+                        <div x-show="dropdownPrivileges" x-transition.duration.300ms style="display: none; background-color: #dddddd15; border-radius: 5px;">
+                            <a class="u-t-white u-pl-16 {{ Request::segment(1) == 'add-user-privilege' ? 'url-active' : '' }}" wire:navigate href="{{ url('/add-user-privilege') }}">
+                                <img src="{{ asset('img/icons/monitor.png') }}" alt="">
+                                <h6 class="">Add privilege</h6>
+                            </a>
+                        </div>
+                        <a class="u-t-white {{ Request::segment(1) == 'add-user' ? 'url-active' : '' }}" wire:navigate href="{{ url('/add-user') }}">
+                            <img src="{{ asset('img/icons/user-profiles.png') }}" alt="">
+                            <h5 class="u-fw-b">User Accounts</h5>
                         </a>
-                    </div>
-                    <a class="u-t-white {{ Request::segment(1) == 'add-user' ? 'url-active' : '' }}" wire:navigate href="{{ url('/add-user') }}">
-                        <img src="{{ asset('img/icons/user-profiles.png') }}" alt="">
-                        <h5 class="u-fw-b">User Accounts</h5>
-                    </a>
-                    <a class="u-t-white {{ Request::segment(1) == 'module-generator' ? 'url-active' : '' }}" wire:navigate href="{{ url('/module-generator') }}">
-                        <img src="{{ asset('img/icons/pencil.png') }}" alt="">
-                        <h5 class="u-fw-b">Module Generator</h5>
-                    </a>
-                    <a class="u-t-white {{ Request::segment(1) == 'user-logs' ? 'url-active' : '' }}" wire:navigate href="{{ url('/user-logs') }}">
-                        <img src="{{ asset('img/icons/log.png') }}" alt="">
-                        <h5 class="u-fw-b">Logs</h5>
-                    </a>
-                </li>
+                        <a class="u-t-white {{ Request::segment(1) == 'module-generator' ? 'url-active' : '' }}" wire:navigate href="{{ url('/module-generator') }}">
+                            <img src="{{ asset('img/icons/pencil.png') }}" alt="">
+                            <h5 class="u-fw-b">Module Generator</h5>
+                        </a>
+                        <a class="u-t-white {{ Request::segment(1) == 'user-logs' ? 'url-active' : '' }}" wire:navigate href="{{ url('/user-logs') }}">
+                            <img src="{{ asset('img/icons/log.png') }}" alt="">
+                            <h5 class="u-fw-b">Logs</h5>
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

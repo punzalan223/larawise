@@ -25,7 +25,7 @@ class UserProfile extends Component
     public $e_email = '';
     public $e_password = '';
     public $e_password_confirmation = '';
-    public $e_img = null;
+    public $e_img;
 
     public function clearDataProperties(){
         $this->reset(['e_password', 'e_password_confirmation', 'e_img']);

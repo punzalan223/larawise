@@ -2,7 +2,7 @@
     <div class="u-flex u-flex-wrap" style="gap: 1rem;">
         <div class="user-profile-box flex-1 u-box-shadow-default u-bg-white">
             <div class="u-p-5">
-                <form wire:submit="editUser">
+                <form wire:submit="editUser" enctype="multipart/form-data" autocomplete="off">
                     <table class="custom_normal_table">
                         <tbody>
                             <tr>
@@ -109,12 +109,12 @@
                                             @endif
                                         </select>
                                     </td>
+                                @if (auth()->user()->privilege_id == 1)
                                     <td>
                                         <p>Topbar background color</p>
                                         <input class="u-input" name="topbar_bg" type="text" value="{{ $app_settings->topbar_bg }}" placeholder="Enter css code" required>
                                     </td>                            
                                 </tr>
-                                @if (auth()->user()->privilege_id == 1)
                                     <tr>
                                         <td>
                                             <p>Sidebar background color</p>
@@ -140,6 +140,7 @@
                                             <p>Login Background Image</p>
                                             <input class="u-input" name="login_bg" type="file" accept="image/*">
                                         </td>
+                                @endif
                                         <td>
                                             <p style="visibility: hidden;">Action</p>
                                             <div class="u-flex-end">
@@ -147,7 +148,6 @@
                                             </div>
                                         </td>
                                     </tr>
-                                @endif
                             </tbody>
                         </table>
                     </form>
@@ -181,6 +181,7 @@
             icon: "success",
             title: data.message
         });
+
     });
 
     if("{{ session('edit-success') }}"){

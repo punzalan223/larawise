@@ -55,6 +55,7 @@ class AddUserPrivilege extends Component
         $this->clearDataProperties();
         $this->clearMessageSession();
 
+        $this->dispatch('refreshComponent');
         request()->session()->flash('add-success', 'Privilege Created Sucessfully');
     }
 
@@ -71,7 +72,8 @@ class AddUserPrivilege extends Component
                 'updated_by' => auth()->user()->id,
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);
-
+            
+        $this->dispatch('refreshComponent');
         request()->session()->flash('edit-success', 'Privilege Edited Sucessfully');
     }
 

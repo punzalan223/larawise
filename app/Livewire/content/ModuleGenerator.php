@@ -55,12 +55,12 @@ class ModuleGenerator extends Component
             'created_by' => auth()->user()->id
         ]);
 
-        $this->createFileControllerBlade($this->a_module_name, $this->a_route_name);
-        $this->createFileController($this->a_controller_name, $this->a_route_name);
-        $this->createFileLivewireBlade($this->a_module_name, $this->a_route_name);
-        $this->createFileLivewireBackend($this->a_route_name);
+        // $this->createFileControllerBlade($this->a_module_name, $this->a_route_name);
+        // $this->createFileController($this->a_controller_name, $this->a_route_name);
+        // $this->createFileLivewireBlade($this->a_module_name, $this->a_route_name);
+        // $this->createFileLivewireBackend($this->a_route_name);
 
-        $this->dispatch('module-added');
+        $this->dispatch('refreshComponent');
         request()->session()->flash('add-success', 'Module Added Sucessfully');
     }
 
@@ -77,6 +77,10 @@ class ModuleGenerator extends Component
     {
         $data = [];
         $data['modules'] = ModelsModuleGenerator::query()
+            ->leftJoin('users', 'users.id', 'module_generators.id')
+            ->select('module_generators.*',
+                'users.name as created_by'
+            )
             ->paginate($this->paginate);
         
         return view('livewire.content.module-generator', $data);

@@ -18,7 +18,6 @@ class SidebarWrapper extends Component
     {
         $data = [];
         $data['privilege_access'] = UsersPrivileges::where('id', auth()->user()->privilege_id)->first();
-        
         $data['lw_user'] = User::find(auth()->user()->id);
         $data['app_settings'] = UsersAppSetting::first();
         $data['modules'] = ModuleGenerator::get();

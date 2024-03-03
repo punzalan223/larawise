@@ -8,6 +8,7 @@
                         <tbody>
                             <tr>
                                 <td>
+
                                     <h3 class="u-fw-b"><i class="fa-solid fa-plus"></i> Add User</h3>
                                 </td>
                             </tr>
@@ -121,7 +122,7 @@
                             <tr>
                                 <td>
                                     <p>Privilege</p>
-                                    <select class="u-input" name="" id="">
+                                    <select class="u-input" wire:model="e_privilege_id" name="" id="">
                                         @foreach ($privileges as  $privilege)
                                             <option value="{{ $privilege->id }}">{{ $privilege->name }}</option>
                                         @endforeach
@@ -179,21 +180,21 @@
                             <tr>
                                 <td>
                                     <p>First name</p>
-                                    <input class="u-input" wire:model="first_name" @if($editUserData) value="{{ $editUserData->first_name }}" @endif name="first_name" type="text" placeholder="Enter first name" disabled>
+                                    <input class="u-input" wire:model="e_first_name" name="first_name" type="text" placeholder="Enter first name" disabled>
                                 </td>
                                 <td>
                                     <p>Last Name</p>
-                                    <input class="u-input" wire:model="last_name" @if($editUserData) value="{{ $editUserData->last_name }}" @endif name="last_name" type="text" placeholder="Enter last name" disabled>
+                                    <input class="u-input" wire:model="e_last_name" name="last_name" type="text" placeholder="Enter last name" disabled>
                                 </td>                            
                             </tr>
                             <tr>
                                 <td>
                                     <p>Contact</p>
-                                    <input class="u-input" wire:model="contact" @if($editUserData) value="{{ $editUserData->contact }}" @endif name="contact" type="text" placeholder="Enter contact number" disabled>
+                                    <input class="u-input" wire:model="e_contact" name="contact" type="text" placeholder="Enter contact number" disabled>
                                 </td>
                                 <td>
                                     <p>Email</p>
-                                    <input class="u-input" wire:model="email" @if($editUserData) value="{{ $editUserData->email }}" @endif name="email" type="text" placeholder="Enter email" disabled>
+                                    <input class="u-input" wire:model="e_email" name="email" type="text" placeholder="Enter email" disabled>
                                 </td>                            
                             </tr>
                         </tbody>
@@ -273,5 +274,4 @@
             </h5>
         </div>
     </div>
-
 </div>

@@ -25,6 +25,7 @@ class AddUser extends Component
     public $email = '';
     public $password = '';
     public $password_confirmation = '';
+    public $privilege_id = '';
 
     // Edit User
     public $e_first_name = '';
@@ -33,6 +34,7 @@ class AddUser extends Component
     public $e_email = '';
     public $e_password = '';
     public $e_password_confirmation = '';
+    public $e_privilege_id = '';
 
     // userId
     public $userId = '';
@@ -50,8 +52,8 @@ class AddUser extends Component
 
     public function clearDataProperties()
     {
-        $this->reset(['first_name', 'last_name', 'contact', 'email', 'password', 'password_confirmation']);
-        $this->reset(['e_first_name', 'e_last_name', 'e_contact', 'e_email', 'e_password', 'e_password_confirmation']);
+        $this->reset(['first_name', 'last_name', 'contact', 'email', 'password', 'password_confirmation', 'privilege_id']);
+        $this->reset(['e_first_name', 'e_last_name', 'e_contact', 'e_email', 'e_password', 'e_password_confirmation', 'e_privilege_id']);
         $this->resetErrorBag();
     }
     
@@ -64,6 +66,7 @@ class AddUser extends Component
             'contact' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:4|confirmed',
+            'privilege_id' => 'required'
         ]);
 
         User::create([
@@ -73,6 +76,7 @@ class AddUser extends Component
             "contact" => $this->contact,
             "email" => $this->email,
             "password" => Hash::make($this->password),
+            'privilege_id' => $this->privilege_id,
             "status" => 'ACTIVE',
         ]);
 
@@ -88,6 +92,7 @@ class AddUser extends Component
             'e_last_name' => 'required',
             'e_contact' => 'required',
             'e_email' => 'required|email',
+            'e_privilege_id' => 'required'
         ];
     
         // Check uniqueness of email only if it's different from the current user's email
@@ -110,6 +115,7 @@ class AddUser extends Component
             "email" => $this->e_email,
             "updated_by" => auth()->user()->id,
             "updated_at" => date('Y-m-d H:i:s'),
+            'privilege_id' => $this->e_privilege_id,
         ]);
 
         if($this->e_password){
@@ -141,6 +147,7 @@ class AddUser extends Component
             $this->e_last_name = $this->editUserData->last_name;
             $this->e_contact = $this->editUserData->contact;
             $this->e_email = $this->editUserData->email;
+            $this->e_privilege_id = $this->editUserData->privilege_id;
         }
     }
 

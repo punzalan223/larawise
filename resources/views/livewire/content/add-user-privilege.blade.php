@@ -1,7 +1,17 @@
-<div x-data="{ showModalAddPrivilege: false, showModalEditPrivilege: false, showModalViewPrivilege: false }">
+<div 
+    x-data="{ showModalAddPrivilege: false, 
+        showModalEditPrivilege: false, 
+        showModalViewPrivilege: false,
+
+        clearSelect(select2) {
+            const selectedModule = select2; 
+            selectedModule.value = '';
+            selectedModule.dispatchEvent(new Event('change'))
+        }
+}">
 
     <div class="modal-center" x-show="showModalAddPrivilege" style="display: none;">
-        <div class="modal-box" @click.outside="showModalAddPrivilege = false; $wire.clearMessageSession()">
+        <div class="modal-box" @click.outside="showModalAddPrivilege = false; $wire.clearMessageSession(); clearSelect($refs.aSelect2)" >
             <div class="modal-content">
                 <form wire:submit="addPrivilege">
                     @csrf
@@ -21,7 +31,7 @@
                             <tr wire:ignore>
                                 <td>
                                     <p>Privilege Module Access</p>
-                                    <select class="u-input u-select2" wire:model="add_privilege_access" id="add-select2" multiple>
+                                    <select class="u-input u-select2" wire:model="add_privilege_access" id="add-select2" x-ref="aSelect2" multiple>
                                         @foreach ($modules as $module)
                                             <option value="{{ $module->id }}">{{ $module->name }}</option>
                                         @endforeach
@@ -66,7 +76,7 @@
     </div>
 
     <div class="modal-center" x-show="showModalEditPrivilege" style="display: none;">
-        <div class="modal-box" @click.outside="showModalEditPrivilege = false; $wire.clearMessageSession(); $wire.clearDataProperties()">
+        <div class="modal-box" @click.outside="showModalEditPrivilege = false; $wire.clearMessageSession(); $wire.clearDataProperties(); clearSelect($refs.eSelect2)">
             <div class="modal-content">
                 <form wire:submit="editPrivilege">
                     @csrf
@@ -86,12 +96,10 @@
                             <tr wire:ignore>
                                 <td>
                                 <p>Privilege Module Access</p>
-                                    <select class="u-input u-edit-select2" wire:model="edit_privilege_access" id="edit-select2" multiple>
-                                        {{-- @foreach ($modules as $module)
+                                    <select class="u-input u-edit-select2" wire:model="edit_privilege_access" id="edit-select2" x-ref="eSelect2" multiple>
+                                        @foreach ($modules as $module)
                                             <option value="{{ $module->id }}">{{ $module->name }}</option>
-                                        @endforeach --}}
-                                        <option value="1">Test1</option>
-                                        <option value="2">Test2</option>
+                                        @endforeach
                                     </select>
                                 </td>
                             </tr>
@@ -112,7 +120,7 @@
                     </div>
                     @endif
                     <div class="u-flex-space-between">
-                        <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-m-10 u-border-1-default" type="button" @click="showModalEditPrivilege = false; $wire.clearMessageSession()">Close</button>
+                        <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-m-10 u-border-1-default" type="button" @click="showModalEditPrivilege = false; $wire.clearMessageSession(); clearSelect()">Close</button>
                         <button class="u-t-white u-fw-b u-btn u-bg-primary u-m-10 u-border-1-default" type="submit">Submit</button>
                     </div>
                 </form>
@@ -121,7 +129,7 @@
     </div>
 
     <div class="modal-center" x-show="showModalViewPrivilege" style="display: none;">
-        <div class="modal-box" @click.outside="showModalViewPrivilege = false; $wire.clearMessageSession(); $wire.clearDataProperties()">
+        <div class="modal-box" @click.outside="showModalViewPrivilege = false; $wire.clearMessageSession(); $wire.clearDataProperties(); clearSelect($refs.vSelect2)">
             <div class="modal-content">
                 <table class="custom_normal_table">
                     <tbody>
@@ -135,6 +143,16 @@
                                 <p>Privilege name</p>
                                 <input class="u-input" wire:model="edit_privilege_name" name="edit_privilege_name" type="text" placeholder="Enter privilege name" disabled>
                             </td>                          
+                        </tr>
+                        <tr wire:ignore>
+                            <td>
+                            <p>Privilege Module Access</p>
+                                <select class="u-input u-edit-select2" wire:model="edit_privilege_access" x-ref="vSelect2" multiple disabled>
+                                    @foreach ($modules as $module)
+                                        <option value="{{ $module->id }}">{{ $module->name }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -153,7 +171,7 @@
                 </div>
                 @endif
                 <div class="u-flex-space-between">
-                    <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-m-10 u-border-1-default" type="button" @click="showModalViewPrivilege = false; $wire.clearMessageSession()">Close</button>
+                    <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-m-10 u-border-1-default" type="button" @click="showModalViewPrivilege = false; $wire.clearMessageSession(); clearSelect($refs.vSelect2)">Close</button>
                 </div>
             </div>
         </div>

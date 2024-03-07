@@ -11,43 +11,43 @@
                                         <div class="s-box-sm u-p-10-15 u-border-radius-5 u-mr-5">
                                             <h3 class="u-t-primary"><i class="fa-solid fa-user"></i></h3>
                                         </div>
-                                        <h4 class="u-fw-b u-t-dark">User Information</h4>
+                                        <h4 class="u-fw-b u-t-gray">User Information</h4>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <p>First name</p>
+                                    <p class="u-fw-300">First name</p>
                                     <input class="u-input" wire:model="e_first_name" type="text" placeholder="Enter first name" required>
                                 </td>
                                 <td>
-                                    <p>Last Name</p>
+                                    <p class="u-fw-300">Last Name</p>
                                     <input class="u-input" wire:model="e_last_name" type="text" placeholder="Enter last name" required>
                                 </td>                            
                             </tr>
                             <tr>
                                 <td>
-                                    <p>Contact</p>
+                                    <p class="u-fw-300">Contact</p>
                                     <input class="u-input" wire:model="e_contact" type="text" placeholder="Enter contact number" required>
                                 </td>
                                 <td>
-                                    <p>Email</p>
+                                    <p class="u-fw-300">Email</p>
                                     <input class="u-input" wire:model="e_email" type="text" placeholder="Enter email" disabled>
                                 </td>                            
                             </tr>
                             <tr>
                                 <td>
-                                    <p>Password</p>
+                                    <p class="u-fw-300">Password</p>
                                     <input class="u-input" wire:model="e_password" type="password" placeholder="Enter password">
                                 </td>
                                 <td>
-                                    <p>Confirm Password</p>
+                                    <p class="u-fw-300">Confirm Password</p>
                                     <input class="u-input" wire:model="e_password_confirmation" type="password" placeholder="Enter confirm password">
                                 </td>                            
                             </tr>
                             <tr>
                                 <td>
-                                    <p>Change Profile Picture</p>
+                                    <p class="u-fw-300">Change Profile Picture</p>
                                     <input class="u-input" id="profile-picture" wire:model="e_img" type="file" accept="image/*">
                                 </td>
                             </tr>
@@ -92,13 +92,13 @@
                                             <div class="s-box-sm u-p-10-15 u-border-radius-5 u-mr-5">
                                                 <h3 class="u-t-primary"><i class="fa-solid fa-gear"></i></h3>
                                             </div>
-                                            <h4 class="u-fw-b u-t-dark">Application Settings</h4>
+                                            <h4 class="u-fw-b u-t-gray">Application Settings</h4>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <p>Dark mode</p>
+                                        <p class="u-fw-300">Dark mode</p>
                                         <select class="u-input" name="dark_mode" required>
                                             @if ($user->dark_mode == 'TRUE')
                                                 <option value="TRUE" selected>TRUE</option>
@@ -111,33 +111,33 @@
                                     </td>
                                 @if (auth()->user()->privilege_id == 1)
                                     <td>
-                                        <p>Topbar background color</p>
+                                        <p class="u-fw-300">Topbar background color</p>
                                         <input class="u-input" name="topbar_bg" type="text" value="{{ $app_settings->topbar_bg }}" placeholder="Enter css code" required>
                                     </td>                            
                                 </tr>
                                     <tr>
                                         <td>
-                                            <p>Sidebar background color</p>
+                                            <p class="u-fw-300">Sidebar background color</p>
                                             <input class="u-input" name="sidebar_bg" type="text" value="{{ $app_settings->sidebar_bg }}" placeholder="Enter css code" required>
                                         </td>
                                         <td>
-                                            <p>Sidebar logo image</p>
+                                            <p class="u-fw-300">Sidebar logo image</p>
                                             <input class="u-input" name="sidebar_img" type="file" accept="image/*">
                                         </td>                         
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p>Sidebar company name</p>
+                                            <p class="u-fw-300">Sidebar company name</p>
                                             <input class="u-input" name="sidebar_title" type="text" value="{{ $app_settings->sidebar_title_name }}" placeholder="Enter company name" required>
                                         </td>
                                         <td>
-                                            <p>Footer company name</p>
+                                            <p class="u-fw-300">Footer company name</p>
                                             <input class="u-input" name="footer_title" type="text" value="{{ $app_settings->footer_company_name }}" placeholder="Enter company name" required>
                                         </td> 
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p>Login Background Image</p>
+                                            <p class="u-fw-300">Login Background Image</p>
                                             <input class="u-input" name="login_bg" type="file" accept="image/*">
                                         </td>
                                 @endif

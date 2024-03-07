@@ -24,16 +24,17 @@
                 <form action="{{ route('login') }}" method="POST" autocomplete="off">
                     @csrf
                     <h2 class="u-fw-b t-color">Login</h2>
-                    <h5 class="u-c-gray u-mt-5">Welcome back you've been missed!</h5>
+                    <h5 class="u-c-gray u-mt-10 u-fw-500">Welcome back you've been missed!</h5>
                     <div class="login-input">
-                        <h5 class="u-fw-b" for="">Email</h5>
-                        <input class="u-input" type="email" name="email" placeholder="Your Email Address" required>
+                        <h5 class="u-t-gray u-fw-500" for="">Email</h5>
+                        <input class="u-input u-mt-10" type="email" name="email" placeholder="Your Email Address" required>
                     </div>
                     <div class="login-input">
-                        <h5 class="u-fw-b" for="">Password</h5>
-                        <input class="u-input" type="password" name="password" placeholder="Your Password" required>
+                        <h5 class="u-t-gray u-fw-500" for="">Password</h5>
+                        <input class="u-input u-mt-10" type="password" name="password" placeholder="Your Password" required>
                     </div>
-                    <button class="u-mt-10 u-btn u-bg-blue u-fw-b u-t-white" id="login-btn">Login</button>
+                    <button class="u-mt-10 u-btn u-fw-b u-t-white" id="login-btn">Login</button>
+                    <h5 class="u-mt-10 u-t-gray u-fw-500" style="text-decoration-line: underline; text-underline-offset: 2px;">Forgot your <span class="u-t-danger">password</span> ?</h5>
                     @error('email')
                         <div class="u-mt-15 u-bg-danger u-p-10 u-fw-b u-t-white">
                             <h5>⚠️ {{ $message }}<h5/>

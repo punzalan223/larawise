@@ -1,4 +1,4 @@
-.login-section{
+.login-section {
     height: 100%;
     display: flex;
     padding: 15px;
@@ -6,19 +6,19 @@
 
 .glass-card {
     border-radius: 16px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    /* backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px); */
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; */
     width: 100%;
     max-width: 500px;
     margin: auto;
     position: relative;
-    border: 1px solid rgb(255, 255, 255);
+    /* border: 1px solid rgb(255, 255, 255); */
     overflow: hidden;
+    box-shadow: 0 6px 8px -1px rgba(59, 113, 202, 0.1),
+    0 3px 6px -2px rgba(59, 113, 202, 0.5);
 }
 
-.glass-card::before {
-    content: '';
+/* .glass-card::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -27,48 +27,48 @@
     backdrop-filter: blur(100px);
     -webkit-backdrop-filter: blur(15px);
     z-index: -1;
-}
+} */
 
-.glass-content{
+.glass-content {
     padding: 30px;
 }
 
-.login-input{
+.login-input {
     display: flex;
     flex-direction: column;
-    margin: 10px 0;
+    margin: 1rem 0;
 }
 
-/* .login-input input{
-    border: none;
-    border-bottom: 2px solid #008080;
-    color: #001F3F;
-    background-color: transparent;
-    padding: 15px 0;
-    font-size: 1rem;
-} */
+.login-input input {
+    border: 1px solid #b3b9c2;
+    height: 45px !important;
+    box-shadow: none !important;
+}
 
 /* .login-input input:focus{
     outline: none;
     border-bottom: 2px solid #a63309;
 } */
 
-.login-input input::placeholder{
+.login-input input::placeholder {
     color: #7c7171;
-    font-weight: bold;
 }
 
-#login-btn{
+#login-btn {
     width: 100%;
+    height: 45px !important;
     border: none;
     font-size: 1rem;
+    box-shadow: 0 6px 8px -1px rgba(59, 113, 202, 0.1),
+        0 3px 6px -2px rgba(59, 113, 202, 0.5);
+    background-color: #3b71ca;
 }
 
-#login-btn:hover{
+#login-btn:hover {
     opacity: 0.7;
 }
 
-#login-glass-img{
+#login-glass-img {
     object-fit: cover;
     height: 250px;
     width: 100%;
@@ -76,7 +76,6 @@
     border-top-right-radius: 16px;
 }
 
-.t-color{
-    color: #3E2723;
+.t-color {
+    color: #3e2723;
 }
-

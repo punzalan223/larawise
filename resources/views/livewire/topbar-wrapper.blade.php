@@ -9,7 +9,7 @@
             </div>
             <div @click.outside="showSetting = false;">
                 <h4 @click="showSetting = !showSetting"><i class="fa-solid fa-gear" :class="darkMode ? 'u-t-dm-white' : ''"></i></h4>
-                <div class="small-box" x-show="showSetting" style="display: none; position: absolute;">
+                <div class="small-box" x-show="showSetting" x-transition.duration.300ms style="display: none; position: absolute;">
                     <div class="user-profile-info  u-flex-center-column" style='{{ $app_settings->sidebar_bg ? "background: $app_settings->sidebar_bg" : '' }}'>
                         <img src="{{ auth()->user()->img ? asset('img/user-profiles/'.auth()->user()->img) : asset('img/icons/user.png') }}" alt="">
                         <h5 class="u-t-white u-mt-5">{{ auth()->user()->name }}</h5>

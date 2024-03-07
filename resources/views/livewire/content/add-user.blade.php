@@ -265,7 +265,7 @@
         </table>
     </div>
     
-    <div class="u-flex-space-between u-flex-wrap">
+    <div class="u-flex-space-between u-flex-wrap u-mt-10">
         {{ $users->links('livewire::default') }}
         <div class="u-flex-alignIt-center">
             <h5 :class="(darkMode ? 'u-t-white' : '')">

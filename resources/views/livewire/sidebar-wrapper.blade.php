@@ -12,7 +12,9 @@
     <div class="sidebar-body">
         <div class="sidebar-user">
             <div class="sidebar-profile-content">
-                <img src="{{ $lw_user->img ? asset('img/user-profiles/' . $lw_user->img) : asset('img/icons/user.png') }}" alt="">
+                <a href="{{ $lw_user->img ? asset('img/user-profiles/' . $lw_user->img) : asset('img/icons/user.png') }}" data-lightbox="image-1" >
+                    <img src="{{ $lw_user->img ? asset('img/user-profiles/' . $lw_user->img) : asset('img/icons/user.png') }}" alt="">
+                </a>
             </div>
             <div class="sidebar-name">
                 <h6 class="u-t-white u-fw-b">{{ auth()->user()->name }}</h6>
@@ -77,4 +79,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true,
+        'imageResize': true,
+        'maxWidth': 200,
+        'disableScrolling': true
+    });
+</script>
 

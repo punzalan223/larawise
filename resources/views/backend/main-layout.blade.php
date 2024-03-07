@@ -15,11 +15,13 @@
     {{-- Sweetalert2 --}}
     <script src="{{ asset('js/sweetalert.js') }}"></script>
     {{-- Jquery --}}
-    <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     {{-- Select2 --}}
     <link href="{{ asset('js/select2/select2.min.css') }}" rel="stylesheet"/>
     <script src="{{ asset('js/select2/select2.min.js') }}"></script>
-
+    {{-- Light Box --}}
+    <link rel="stylesheet" href="{{ asset('js/lightbox/dist/css/lightbox.min.css') }}">
+    <script src="{{ asset('js/lightbox/dist/js/lightbox-plus-jquery.min.js') }}"></script>
     
 </head>
 <body x-data="{ initialized: false, showSidenav: true, darkMode: false }">

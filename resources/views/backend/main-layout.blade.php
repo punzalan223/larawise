@@ -6,25 +6,43 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Larawise</title>
     {{-- Favicon --}}
-    {{-- <link rel="icon" type="image/x-icon" href="{{ asset("img/logo/$main_app_settings->sidebar_logo_img") }}"> --}}
+    <link rel="icon" type="image/x-icon" 
+        x-data="{ mainAppSettings: '' }"
+        x-init="() => {
+            async function logAppSettings() {
+                const response = await fetch('/app-settings'); // Directly specify the URL
+                const appSettings = await response.json();
+                // Assuming you want to assign the fetched data to the Alpine.js data property
+                this.mainAppSettings = `{{ asset('img/logo') }}/${appSettings.sidebar_logo_img}`;
+
+                $el.href=`{{ asset('img/logo') }}/${appSettings.sidebar_logo_img}`
+            }
+            logAppSettings();
+        }"
+    >
     {{-- Font Awesome --}}
     <script src="https://kit.fontawesome.com/358f25eac2.js" crossorigin="anonymous"></script>
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/utilities.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main-layout/main.css') }}">
-    {{-- Sweetalert2 --}}
-    <script src="{{ asset('js/sweetalert.js') }}"></script>
-    {{-- Jquery --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    {{-- Select2 --}}
-    <link href="{{ asset('js/select2/select2.min.css') }}" rel="stylesheet"/>
-    <script src="{{ asset('js/select2/select2.min.js') }}"></script>
     {{-- Light Box --}}
     <link rel="stylesheet" href="{{ asset('js/lightbox/dist/css/lightbox.min.css') }}">
-    <script src="{{ asset('js/lightbox/dist/js/lightbox-plus-jquery.min.js') }}"></script>
-    
+    {{-- Select2 --}}
+    <link href="{{ asset('js/select2/select2.min.css') }}" rel="stylesheet"/>
 </head>
-<body x-data="{ initialized: false, showSidenav: true, darkMode: false }">
+<body 
+    x-data="{ 
+        initialized: false, 
+        showSidenav: true, 
+        darkMode: false ,
+
+        screenWidth: function screenWidth() {
+            if(window.screen.width <= 700){
+                this.showSidenav = false
+            }
+        }
+    }"
+>
 
     @if (session('login-success'))
         <div class="modal-center" x-data="{showModalTaC: true}" x-show="showModalTaC" style="z-index: 2">
@@ -43,20 +61,38 @@
         </div>
     @endif
 
-    <div class="sidebarHW u-box-shadow-default">
+    {{-- <div class="sidebarHW u-box-shadow-default">
         <div class="sidebarMenu" @click="showSidenav = !showSidenav" x-show="showSidenav" x-transition.duration.300ms>
             <i class="fa-solid fa-bars"></i>
         </div>
-    </div>
+    </div> --}}
 
     <main x-init="init" :class="darkMode ? 'u-bg-dm-dark' : ''">
         @livewire('sidebar-wrapper')
         @livewire('topbar-wrapper')
     </main>
+
+    {{-- Sweetalert2 --}}
+    <script src="{{ asset('js/sweetalert.js') }}"></script>
+    {{-- Jquery --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{{ asset('js/lightbox/dist/js/lightbox-plus-jquery.min.js') }}"></script>
+    <script src="{{ asset('js/select2/select2.min.js') }}"></script>
     <script>
         function init() {
-            this.darkMode = "{{ auth()->user()->dark_mode }}".toUpperCase() === 'FALSE' ? false : true;            
+            this.darkMode = "{{ auth()->user()->dark_mode }}".toUpperCase() === 'FALSE' ? false : true;      
+            
+            setTimeout(() => {
+                lightbox.option({
+                    'resizeDuration': 200,
+                    'wrapAround': true,
+                    'imageResize': true,
+                    'maxWidth': 200,
+                    'disableScrolling': true
+                    });
+            }, 100);
         }
     </script>
+    @yield('my_script')
 </body>
 </html>

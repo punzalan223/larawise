@@ -42,8 +42,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
     .pagination li a:hover,
     .pagination li span:hover,
     .pagination li button:hover{
-        background-color: #2A4C4E; 
-        color: white;
+        opacity: 0.7 !important;
     }
 
     .pagination .active a {
@@ -62,8 +61,12 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
     /* Style for the current page link */
     .pagination .active span {
         background-color: #2A4C4E; 
-        color: white;
+        color: #007bff;
         cursor: default;
+    }
+
+    .page-link{
+        background-color: #fff !important;
     }
 
     @media only screen and (max-width: 600px) {

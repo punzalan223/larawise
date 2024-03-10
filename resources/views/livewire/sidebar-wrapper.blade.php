@@ -1,4 +1,4 @@
-<div class="sidebar-box" x-show="showSidenav" x-transition.duration.300ms style='{{ $app_settings->sidebar_bg ? "background: $app_settings->sidebar_bg" : '' }}'>
+<div class="sidebar-box" x-show="showSidenav" x-transition.duration.300ms style='{{ $app_settings->sidebar_bg ? "background: $app_settings->sidebar_bg" : '' }}' @click.outside="screenWidth()">
     <a href="{{ url('/dashboard') }}" class="sidebar-logo">
         <div class="sidebar-logo-content">
             <div>
@@ -80,13 +80,5 @@
     </div>
 </div>
 
-<script>
-    lightbox.option({
-        'resizeDuration': 200,
-        'wrapAround': true,
-        'imageResize': true,
-        'maxWidth': 200,
-        'disableScrolling': true
-    });
-</script>
+
 

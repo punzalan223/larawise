@@ -13,7 +13,8 @@ class MainController extends Controller
     public function index()
     {
         $data = [];
-
+        $data['main_app_settings'] = self::appSettings();
+        
         return view('links.dashboard', $data);
     }
 

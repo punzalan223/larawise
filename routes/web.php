@@ -27,6 +27,8 @@ Route::get('/', function () {
     return redirect('login');
 });
 
+Route::get('app-settings', [MainController::class, 'appSettings'])->name('appSettings');
+
 // Login
 Route::get('login', [LoginController::class, 'index'])->name('login-index');
 Route::post('login-account', [LoginController::class, 'login'])->name('login');

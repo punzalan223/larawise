@@ -42,6 +42,16 @@
                                     <input class="u-input" wire:model="password_confirmation" name="password_confirmation" type="password" placeholder="Enter confirm password" required>
                                 </td>                            
                             </tr>
+                            <tr>
+                                <td>
+                                    <p>Privilege</p>
+                                    <select class="u-input" wire:model="privilege_id" name="" id="">
+                                        @foreach ($privileges as  $privilege)
+                                            <option value="{{ $privilege->id }}">{{ $privilege->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     @if($errors->hasAny(['first_name', 'last_name', 'contact', 'email', 'password']))
@@ -197,6 +207,16 @@
                                     <input class="u-input" wire:model="e_email" name="email" type="text" placeholder="Enter email" disabled>
                                 </td>                            
                             </tr>
+                            <tr>
+                                <td>
+                                    <p>Privilege</p>
+                                    <select class="u-input" wire:model="e_privilege_id" name="" id="" disabled>
+                                        @foreach ($privileges as  $privilege)
+                                            <option value="{{ $privilege->id }}">{{ $privilege->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr
                         </tbody>
                     </table>
                     <div class="u-flex-space-between">

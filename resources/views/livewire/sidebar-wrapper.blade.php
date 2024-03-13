@@ -12,10 +12,11 @@
     <div class="sidebar-body">
         <div class="sidebar-user">
             <div class="sidebar-profile-content">
-                <a href="{{ $lw_user->img ? asset('img/user-profiles/' . $lw_user->img) : asset('img/icons/user.png') }}" data-lightbox="image-1" >
-                    <img src="{{ $lw_user->img ? asset('img/user-profiles/' . $lw_user->img) : asset('img/icons/user.png') }}" alt="">
+                <a href="{{ $lw_user->img ? asset('img/user-profiles/' . $lw_user->img) . '?v=' . time() : asset('img/icons/user.png') }}" data-fslightbox="gallery" >
+                    <img src="{{ $lw_user->img ? asset('img/user-profiles/' . $lw_user->img) . '?v=' . time() : asset('img/icons/user.png') }}" alt="">
                 </a>
             </div>
+            
             <div class="sidebar-name">
                 <h6 class="u-t-white u-fw-b">{{ auth()->user()->name }}</h6>
             </div>

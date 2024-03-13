@@ -484,12 +484,6 @@ h6 {
     border: 1px solid #ddd;
 }
 
-input:read-only,
-input:disabled,
-select:disabled {
-    background-color: #eee;
-}
-
 input::file-selector-button {
     margin: 0.6rem;
 }

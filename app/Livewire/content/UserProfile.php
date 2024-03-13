@@ -109,7 +109,6 @@ class UserProfile extends Component
             $this->e_email = $data['user']->email;
         }
 
-
         return view('livewire.content.user-profile', $data);
     }
 }

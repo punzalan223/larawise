@@ -26,7 +26,8 @@
     <link rel="stylesheet" href="{{ asset('css/utilities.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main-layout/main.css') }}">
     {{-- Light Box --}}
-    <link rel="stylesheet" href="{{ asset('js/lightbox/dist/css/lightbox.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('js/lightbox/dist/css/lightbox.min.css') }}"> --}}
+    <script src="https://cdn.jsdelivr.net/npm/fslightbox"></script>
     {{-- Select2 --}}
     <link href="{{ asset('js/select2/select2.min.css') }}" rel="stylesheet"/>
 </head>
@@ -76,21 +77,13 @@
     <script src="{{ asset('js/sweetalert.js') }}"></script>
     {{-- Jquery --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{{ asset('js/lightbox/dist/js/lightbox-plus-jquery.min.js') }}"></script>
+    {{-- FSLightbox --}}
+    <script src="{{ asset('js/fslightbox/fslightbox.js') }}"></script>
+    {{-- Select2 --}}
     <script src="{{ asset('js/select2/select2.min.js') }}"></script>
     <script>
         function init() {
             this.darkMode = "{{ auth()->user()->dark_mode }}".toUpperCase() === 'FALSE' ? false : true;      
-            
-            setTimeout(() => {
-                lightbox.option({
-                    'resizeDuration': 200,
-                    'wrapAround': true,
-                    'imageResize': true,
-                    'maxWidth': 200,
-                    'disableScrolling': true
-                    });
-            }, 100);
         }
     </script>
     @yield('my_script')

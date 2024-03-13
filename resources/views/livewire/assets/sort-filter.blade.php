@@ -7,7 +7,22 @@
     <div class="modal-center">
         <div class="modal-box" style="max-width: 800px;">
             <div class="modal-content">
-                table
+                <table class="custom_normal_table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>Hey</span>
+                                <div class="u-flex u-flex-wrap">
+                                    <select class="u-input flex-2 u-mr-10" name="" id="">
+                                    </select>
+                                    <input class="u-input flex-1 u-mr-10" type="text">
+                                    <select class="u-input flex-2 u-mr-10" name="" id="">
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

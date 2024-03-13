@@ -353,6 +353,14 @@ h6 {
     border: 1px solid #ddd;
 }
 
+.u-max-w-300 {
+    max-width: 18.75rem;
+}
+
+.u-min-w-300 {
+    min-width: 18.75rem;
+}
+
 .u-hide {
     display: none;
 }
@@ -619,13 +627,11 @@ input::file-selector-button {
 }
 
 .flex-1 {
-    flex-grow: 6;
-    flex-basis: 700px;
+    flex: 1 1 300px;
 }
 
 .flex-2 {
-    flex-grow: 4;
-    flex-basis: 500px;
+    flex: 1 1 150px;
 }
 
 .swal2-toast {

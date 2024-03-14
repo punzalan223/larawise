@@ -238,26 +238,24 @@
                 <option value="1000">1000</option>
             </select>
             <button class="u-t-white u-fw-b u-btn u-bg-primary u-mr-5" type="button" id="add-user" @click="showModalAddUser = true"><i class="fa-solid fa-plus"></i> Add User</button>
-            <button class="u-t-white u-fw-b u-btn u-bg-primary u-mr-5" type="button" id="export"><i class="fa-solid fa-download"></i> Export</button>
+            <button class="u-t-gray u-fw-b u-btn u-bg-default u-mr-5" type="button" id="export"><i class="fa-solid fa-download"></i> Export</button>
         </div>
-        @livewire('assets.sort-filter', ['name' => 'Gilles'])
+        
+        <div class="u-flex">
+            @livewire('assets.sort-filter', ['column_names' => $columns])
+            <input class="u-input" style="max-width: 15.635rem;" wire:model.live="search" type="text" placeholder="Search">
+        </div>
     </div>
     <div style="overflow-x: auto; border-radius: 0.5rem; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
         <table class="u-responsive-table">
             <tr class="u-fw-b">
-                <td>ID</td>
-                <td>Name</td>
-                <td>First Name</td>
-                <td>Last Name</td>
-                <td>Contact</td>
-                <td>Email</td>
-                <td>Status</td>
-                <td>Created At</td>
+                @foreach ($columns as $column)
+                    <td>{{ ucwords(str_replace('_', ' ', $column)) }}</td>
+                @endforeach
                 <td>Action</td>
             </tr>
             @foreach ($users as $user)
                 <tr class="u-t-gray">
-                    <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->first_name }}</td>
                     <td>{{ $user->last_name }}</td>

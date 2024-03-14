@@ -16,8 +16,8 @@
                         <h6 class="u-t-white">{{ $ls_user->privilege_name }}</h6>
                     </div>
                     <div class="user-profile-actions u-flex-center-row">
-                        <a class="u-btn u-t-white u-bg-primary" wire:navigate style="margin-right: 5px;" href="{{ route('user-profile', auth()->user()->id) }}">Profile</a>
-                        <a class="u-btn u-t-white u-bg-danger" style="margin-left: 5px;" href="{{ route('logout') }}">Logout</a>
+                        <a class="u-flex-alignIt-center u-bg-primary u-t-white u-btn u-mr-5" href="{{ route('user-profile', auth()->user()->id) }}">Profile</a>
+                        <a class="u-flex-alignIt-center u-btn u-t-white u-bg-danger" style="margin-left: 5px;" href="{{ route('logout') }}">Logout</a>
                     </div>
                 </div>
             </div>

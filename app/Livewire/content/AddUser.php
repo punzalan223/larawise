@@ -8,13 +8,17 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\Url;
 
 class AddUser extends Component
 {
     use WithPagination;
 
-    public $editUserData;
+    public $columns = ['name', 'first_name', 'last_name', 'contact', 'email', 'status', 'created_at'];
 
+    public $editUserData;
+    
+    #[Url]
     public $search = '';
     public $paginate = 10;
 
@@ -153,17 +157,17 @@ class AddUser extends Component
 
     public function render()
     {
-        $data = [];
 
-        $data['users'] = User::query()
-            ->orWhere('name', 'like', '%' . $this->search . '%')
-            ->orWhere('first_name', 'like', '%' . $this->search . '%')
-            ->orWhere('last_name', 'like', '%' . $this->search . '%')
-            ->orWhere('contact', 'like', '%' . $this->search . '%')
-            ->orWhere('email', 'like', '%' . $this->search . '%')
-            ->orWhere('status', 'like', '%' . $this->search . '%')
-            ->orderBy('id', 'asc')
-            ->paginate($this->paginate);
+        $data = [];
+        $data['columns'] = $this->columns;
+        $data['users'] = User::query();
+        foreach($data['columns'] as $column){
+            $data['users']->orWhere($column, 'like', '%' . $this->search . '%');
+        }
+        $data['users'] = $data['users']
+        ->orderBy('id', 'asc')
+        ->paginate($this->paginate);
+
         $data['privileges'] = UsersPrivileges::get();
 
         return view('livewire.content.add-user', $data);

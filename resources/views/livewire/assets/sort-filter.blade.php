@@ -4,7 +4,7 @@
     <div class="modal-center" x-show="showSortFilter" style="display: none;">
         <div class="modal-box" style="max-width: 70rem;">
             <div class="modal-content">
-                <form action="">
+                <form wire:submit="filteredData">
                     <table class="custom_normal_table">
                         <tbody>
                             <tr>
@@ -17,14 +17,14 @@
                                     <td>
                                         <div class="u-flex u-flex-wrap u-align-items-center ">
                                             <span class="u-ml-10 flex-2">{{ ucwords(str_replace('_', ' ', $column)) }}</span>
-                                            <select class="u-input flex-2 u-ml-10 u-mr-10" name="" id="">
-                                                <option value="" selected disabled>Filter...</option>
+                                            <select class="u-input flex-2 u-ml-10 u-mr-10" wire:model="filter_column.{{ $column }}" id="">
+                                                <option disabled>Filter...</option>
                                                 @foreach ($filters as $key => $value)
                                                     <option value="{{ $value }}">{{ ucfirst(str_replace('_', ' ', $key)) }}</option>
                                                 @endforeach
                                             </select>
-                                            <input class="u-input flex-1 u-ml-10 u-mr-10" type="text">
-                                            <select class="u-input flex-2 u-ml-10 u-mr-10" name="" id="">
+                                            <input class="u-input flex-1 u-ml-10 u-mr-10" wire:model="input_column.{{ $column }}" type="text">
+                                            <select class="u-input flex-2 u-ml-10 u-mr-10" wire:model="sort_column.{{ $column }}" id="">
                                                 <option value="" selected disabled>Sorting...</option>
                                                 @foreach ($sorts as $sort)
                                                     <option value="{{ $sort }}">{{ strtoupper(str_replace('_', ' ', $sort)) }}</option>

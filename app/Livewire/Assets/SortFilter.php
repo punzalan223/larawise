@@ -16,6 +16,9 @@ class SortFilter extends Component
     ];
     public $sort = ['asc', 'desc'];
     public $column_names;
+    public $filter_column = [];
+    public $input_column = [];
+    public $sort_column = [];
 
     public function render()
     {
@@ -24,5 +27,9 @@ class SortFilter extends Component
         $data['sorts'] = $this->sort;
         $data['sort_filter_columns'] = $this->column_names;
         return view('livewire.assets.sort-filter', $data);
+    }
+
+    public function filteredData(){
+        dd($this->filter_column, $this->input_column, $this->sort_column );
     }
 }

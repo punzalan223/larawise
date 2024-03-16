@@ -9,7 +9,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <h4><i class="fa-solid fa-filter"></i> Sort & Filter</h>
+                                    <h4><i class="fa-solid fa-filter"></i> Sort & Filter</h4>
                                 </td>
                             </tr>
                             @foreach ($sort_filter_columns as $column)
@@ -17,14 +17,14 @@
                                     <td>
                                         <div class="u-flex u-flex-wrap u-align-items-center ">
                                             <span class="u-ml-10 flex-2">{{ ucwords(str_replace('_', ' ', $column)) }}</span>
-                                            <select class="u-input flex-2 u-ml-10 u-mr-10" wire:model="filter_column.{{ $column }}" id="">
-                                                <option disabled>Filter...</option>
+                                            <select class="u-input flex-2 u-ml-10 u-mr-10 {{ "filter_$column" }}" wire:model="filter_column.{{ $column }}" wire:change="enableSelectedRow('{{ $column }}')" id="">
+                                                <option value="" selected disabled>Filter...</option>
                                                 @foreach ($filters as $key => $value)
                                                     <option value="{{ $value }}">{{ ucfirst(str_replace('_', ' ', $key)) }}</option>
                                                 @endforeach
                                             </select>
-                                            <input class="u-input flex-1 u-ml-10 u-mr-10" wire:model="input_column.{{ $column }}" type="text">
-                                            <select class="u-input flex-2 u-ml-10 u-mr-10" wire:model="sort_column.{{ $column }}" id="">
+                                            <input class="u-input flex-1 u-ml-10 u-mr-10" wire:model="input_column.{{ $column }}" type="text" {{ $disabled[$column] ? 'disabled' : 'required' }}>
+                                            <select class="u-input flex-2 u-ml-10 u-mr-10" wire:model="sort_column.{{ $column }}" id="" {{ $disabled[$column] ? 'disabled' : 'required' }}>
                                                 <option value="" selected disabled>Sorting...</option>
                                                 @foreach ($sorts as $sort)
                                                     <option value="{{ $sort }}">{{ strtoupper(str_replace('_', ' ', $sort)) }}</option>
@@ -38,7 +38,10 @@
                     </table>
                     <div class="u-flex-space-between u-ml-10 u-mr-10">
                         <button @click="showSortFilter=false;" class="u-t-gray-dark u-fw-b u-btn u-bg-default u-m-10 u-border-1-default" type="button"">Close</button>
-                        <button class="u-t-white u-fw-b u-btn u-bg-primary u-m-10 u-border-1-default" type="submit">Submit</button>
+                        <div class="u-flex">
+                            <button class="u-t-gray-dark u-fw-b u-btn u-bg-default u-mt-10 u-border-1-default" wire:click="clearFilteredData" type="button">Reset</button>
+                            <button class="u-t-white u-fw-b u-btn u-bg-primary u-m-10 u-border-1-default" type="submit">Submit</button>
+                        </div>
                     </div>
                 </form>
             </div>

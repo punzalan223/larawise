@@ -9,12 +9,13 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Url;
+use Livewire\Attributes\On; 
 
 class AddUser extends Component
 {
     use WithPagination;
 
-    public $columns = ['name', 'first_name', 'last_name', 'contact', 'email', 'status', 'created_at'];
+    public $columns = ['privilege_id', 'name', 'first_name', 'last_name', 'contact', 'email', 'status', 'created_at'];
 
     public $editUserData;
     
@@ -29,7 +30,7 @@ class AddUser extends Component
     public $email = '';
     public $password = '';
     public $password_confirmation = '';
-    public $privilege_id = '';
+    public $privilege_id = '1';
 
     // Edit User
     public $e_first_name = '';
@@ -40,9 +41,18 @@ class AddUser extends Component
     public $e_password_confirmation = '';
     public $e_privilege_id = '';
 
+    public $filter;
+
     // userId
     public $userId = '';
 
+    // Filter Query
+    #[On('sort-filter')]
+    public function updateQuery($message)
+    {
+        $this->filter = $message;
+    }
+    
     public function search()
     {
         $this->resetPage();
@@ -64,30 +74,32 @@ class AddUser extends Component
 
     public function addUser()
     {
-        $this->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'contact' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:4|confirmed',
-            'privilege_id' => 'required'
-        ]);
+            $this->validate([
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'contact' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:4|confirmed',
+                'privilege_id' => 'required'
+            ]);
+            
+            User::create([
+                "name" => $this->first_name.' '.$this->last_name,
+                "first_name" => $this->first_name,
+                "last_name" => $this->last_name,
+                "contact" => $this->contact,
+                "email" => $this->email,
+                "password" => Hash::make($this->password),
+                'privilege_id' => $this->privilege_id,
+                "status" => 'ACTIVE',
+            ]);
 
-        User::create([
-            "name" => $this->first_name.' '.$this->last_name,
-            "first_name" => $this->first_name,
-            "last_name" => $this->last_name,
-            "contact" => $this->contact,
-            "email" => $this->email,
-            "password" => Hash::make($this->password),
-            'privilege_id' => $this->privilege_id,
-            "status" => 'ACTIVE',
-        ]);
+            $this->clearDataProperties();
 
-        $this->clearDataProperties();
-
-        request()->session()->flash('add-success', 'User Created Sucessfully');
+            request()->session()->flash('add-success', 'User Created Successfully');
+       
     }
+
 
     public function editUser()
     {
@@ -158,15 +170,32 @@ class AddUser extends Component
     public function render()
     {
 
+        $filtered = $this->filter;
+        
         $data = [];
         $data['columns'] = $this->columns;
-        $data['users'] = User::query();
-        foreach($data['columns'] as $column){
-            $data['users']->orWhere($column, 'like', '%' . $this->search . '%');
+        $data['users'] = User::query()
+            ->leftJoin('users_privileges', 'users_privileges.id', 'users.privilege_id')
+            ->select('users.*',
+                'users_privileges.name as privilege_id'
+            );
+
+        // Apply filters
+        if (!empty($filtered['input'])) {
+            foreach ($filtered['input'] as $key => $value) {
+                $data['users']->where("users.$key", $filtered['filter'][$key], $value)->orderBy("users.$key", $filtered['sort'][$key]);
+            }
         }
-        $data['users'] = $data['users']
-        ->orderBy('id', 'asc')
-        ->paginate($this->paginate);
+        // Apply search
+        $searchTerm = $this->search;
+        if (!empty($searchTerm)) {
+            $data['users']->where(function($query) use ($searchTerm) {
+                foreach ($this->columns as $column) {
+                    $query->orWhere("users.$column", 'like', '%' . $searchTerm . '%');
+                }
+            });
+        }
+        $data['users'] = $data['users']->orderBy('users.id', 'asc')->paginate($this->paginate);
 
         $data['privileges'] = UsersPrivileges::get();
 

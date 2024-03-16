@@ -238,7 +238,7 @@
                 <option value="1000">1000</option>
             </select>
             <button class="u-t-white u-fw-b u-btn u-bg-primary u-mr-5" type="button" id="add-user" @click="showModalAddUser = true"><i class="fa-solid fa-plus"></i> Add User</button>
-            <button class="u-t-gray u-fw-b u-btn u-bg-default u-mr-5" type="button" id="export"><i class="fa-solid fa-download"></i> Export</button>
+            <button class="u-t-white u-fw-b u-btn u-bg-primary u-mr-5" type="button" id="export"><i class="fa-solid fa-download"></i> Export</button>
         </div>
         
         <div class="u-flex">
@@ -256,13 +256,18 @@
             </tr>
             @foreach ($users as $user)
                 <tr class="u-t-gray">
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->first_name }}</td>
-                    <td>{{ $user->last_name }}</td>
-                    <td>{{ $user->contact }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td class="u-fw-b {{ $user->status == 'ACTIVE' ? 'u-t-success' : 'u-t-danger' }}">{{ $user->status }}</td>
-                    <td>{{ $user->created_at }}</td>
+                @foreach ($columns as $column)
+                    <td 
+                        @if ($column == 'status')
+                            @if ($user->$column == 'ACTIVE')
+                                class="u-t-success u-fw-b"
+                            @else
+                                class="u-t-danger"
+                            @endif
+                        @endif
+                        >{{ $user->$column }}
+                    </td>
+                @endforeach
                     <td>
                         <div class="action-btns">
                             <button class="action-btn u-bg-primary u-t-white" wire:click="viewUser({{ $user->id }})" @click="showModalEditUser = true;" type="button"><i class="fa-solid fa-pencil"></i></button>

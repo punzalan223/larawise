@@ -24,18 +24,7 @@ class AdminUserSeeder extends Seeder
             'password' => Hash::make('qwerty'),
             'status' => 'ACTIVE',
             'created_by' => 1,
-        ]);
-
-        User::updateOrInsert(['name' => 'Fillinor Gunio'],
-            [
-            'name' => 'Fillinor Gunio',
-            'first_name' => 'Fillinor',
-            'last_name' => 'Gunio',
-            'contact' => '09763896443',
-            'email' => 'filongunio@gmail.com',
-            'password' => Hash::make('qwerty'),
-            'status' => 'ACTIVE',
-            'created_by' => 1,
+            'created_at' => date('Y-m-d H:i:s')
         ]);
     }
 }

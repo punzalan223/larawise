@@ -42,7 +42,7 @@ class SortFilter extends Component
         $data = [
             'filters' => $this->filter,
             'sorts' => $this->sort, 
-            'sort_filter_columns' => $this->column_names,
+            'sort_filter_columns' => array_keys($this->column_names),
             'disabled' => $this->inputSortDisabled,
         ];
 
@@ -82,10 +82,10 @@ class SortFilter extends Component
     public function defaultFilterData()
     {
         $this->input_column = [];
-        foreach($this->column_names as $col){
-            $this->filter_column[$col] = '';
-            $this->sort_column[$col] = '';
-            $this->inputSortDisabled [$col] = true; // Initially disable input and sort fields for all columns
+        foreach($this->column_names as $key => $value){
+            $this->filter_column[$key] = '';
+            $this->sort_column[$key] = '';
+            $this->inputSortDisabled [$key] = true; // Initially disable input and sort fields for all columns
         }
     }
 }

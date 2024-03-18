@@ -15,7 +15,16 @@ class AddUser extends Component
 {
     use WithPagination;
 
-    public $columns = ['privilege_id', 'name', 'first_name', 'last_name', 'contact', 'email', 'status', 'created_at'];
+    public $columns = [
+        'privilege_id' => ['table' => 'users_privileges', 'join_id' => 'name', 'column_name' => 'Privilege Name'],
+        'name' => ['column_name' => 'Name'],
+        'first_name' => ['column_name' => 'First Name'],
+        'last_name' => ['column_name' => 'Last Name'],
+        'contact' => ['column_name' => 'Contact'],
+        'email' => ['column_name' => 'Email'],
+        'status' => ['column_name' => 'Status'],
+        'created_at' => ['column_name' => 'Created At'],
+    ];
 
     public $editUserData;
     
@@ -173,7 +182,11 @@ class AddUser extends Component
         $filtered = $this->filter;
         
         $data = [];
-        $data['columns'] = $this->columns;
+        $data['columns'] = array_keys(array_filter($this->columns, function ($key) {
+    return is_array($key);
+}));
+
+        dd($data['columns']);
         $data['users'] = User::query()
             ->leftJoin('users_privileges', 'users_privileges.id', 'users.privilege_id')
             ->select('users.*',

@@ -15,8 +15,10 @@ class AddUser extends Component
 {
     use WithPagination;
 
+    public $module_table = 'users';
+
     public $columns = [
-        'privilege_id' => ['table' => 'users_privileges', 'join_id' => 'name', 'column_name' => 'Privilege Name'],
+        'privilege_id' => ['table' => 'users_privileges', 'join_id' => 'privilege_id', 'join' => 'id', 'selected_column' => 'name', 'column_name' => 'Privilege Name'],
         'name' => ['column_name' => 'Name'],
         'first_name' => ['column_name' => 'First Name'],
         'last_name' => ['column_name' => 'Last Name'],
@@ -83,30 +85,29 @@ class AddUser extends Component
 
     public function addUser()
     {
-            $this->validate([
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'contact' => 'required',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|min:4|confirmed',
-                'privilege_id' => 'required'
-            ]);
-            
-            User::create([
-                "name" => $this->first_name.' '.$this->last_name,
-                "first_name" => $this->first_name,
-                "last_name" => $this->last_name,
-                "contact" => $this->contact,
-                "email" => $this->email,
-                "password" => Hash::make($this->password),
-                'privilege_id' => $this->privilege_id,
-                "status" => 'ACTIVE',
-            ]);
+        $this->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'contact' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:4|confirmed',
+            'privilege_id' => 'required'
+        ]);
+        
+        User::create([
+            "name" => $this->first_name.' '.$this->last_name,
+            "first_name" => $this->first_name,
+            "last_name" => $this->last_name,
+            "contact" => $this->contact,
+            "email" => $this->email,
+            "password" => Hash::make($this->password),
+            'privilege_id' => $this->privilege_id,
+            "status" => 'ACTIVE',
+        ]);
 
-            $this->clearDataProperties();
+        $this->clearDataProperties();
 
-            request()->session()->flash('add-success', 'User Created Successfully');
-       
+        request()->session()->flash('add-success', 'User Created Successfully');
     }
 
 
@@ -178,37 +179,74 @@ class AddUser extends Component
 
     public function render()
     {
-
         $filtered = $this->filter;
+        $columns_selected = [];
+        $module_table = $this->module_table;
         
         $data = [];
         $data['columns'] = array_keys(array_filter($this->columns, function ($key) {
-    return is_array($key);
-}));
+            return is_array($key);
+        }));
 
-        dd($data['columns']);
-        $data['users'] = User::query()
-            ->leftJoin('users_privileges', 'users_privileges.id', 'users.privilege_id')
-            ->select('users.*',
-                'users_privileges.name as privilege_id'
-            );
+        $data['users'] = User::query();
 
+        $select = "$this->module_table.*";
+        foreach ($this->columns as $key => $value) {
+            $alias = '';
+
+            if (isset($value['table']) && isset($value['join_id']) && isset($value['selected_column'])) {
+                $table = $value['table'];
+                $join = $value['join'];
+                $join_id = $value['join_id'];
+                $selected_column = $value['selected_column'];
+
+                $alias = $table.'_'.$selected_column;
+                
+                // Construct the LEFT JOIN statement
+                $data['users']->leftJoin($table, "$table.$join", '=', "$this->module_table.$key");
+
+                // Append the selected column with alias to the select string
+                $select .= ", $table.$selected_column AS $alias"; // Assuming $key is the alias
+            }else{
+                $alias = $key;
+            }
+
+            array_push($columns_selected, $alias);
+        }
+
+        $data['users']->selectRaw($select);
+        
         // Apply filters
         if (!empty($filtered['input'])) {
             foreach ($filtered['input'] as $key => $value) {
-                $data['users']->where("users.$key", $filtered['filter'][$key], $value)->orderBy("users.$key", $filtered['sort'][$key]);
+                if (isset($this->columns[$key]['table'])){
+                    $data['users']->where($this->columns[$key]['table'].'.'.$this->columns[$key]['selected_column'], $filtered['filter'][$key], $value)->orderBy($this->columns[$key]['table'].'.'.$this->columns[$key]['selected_column'], $filtered['sort'][$key]);
+                }else{
+                    $data['users']->where($module_table.'.'.$key, $filtered['filter'][$key], $value)->orderBy($module_table.'.'.$key, $filtered['sort'][$key]);
+                }
+
             }
         }
         // Apply search
         $searchTerm = $this->search;
         if (!empty($searchTerm)) {
             $data['users']->where(function($query) use ($searchTerm) {
-                foreach ($this->columns as $column) {
-                    $query->orWhere("users.$column", 'like', '%' . $searchTerm . '%');
+                foreach ($this->columns as $column => $value) {
+                    // If column is from joined table, use alias for search
+                    if (isset($value['table']) && isset($value['join_id']) && isset($value['selected_column'])) {
+                        $table = $value['table'];
+                        $selected_column = $value['selected_column'];
+                        $alias = $table.'.'.$selected_column;
+                        $query->orWhere("$alias", 'like', '%' . $searchTerm . '%');
+                    } else {
+                        // Otherwise, use column from the main table
+                        $query->orWhere("users.$column", 'like', '%' . $searchTerm . '%');
+                    }
                 }
             });
         }
         $data['users'] = $data['users']->orderBy('users.id', 'asc')->paginate($this->paginate);
+        $data['columns_selected'] = $columns_selected;
 
         $data['privileges'] = UsersPrivileges::get();
 

@@ -249,23 +249,23 @@
     <div style="overflow-x: auto; border-radius: 0.5rem; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
         <table class="u-responsive-table">
             <tr class="u-fw-b">
-                @foreach ($columns as $column)
-                    <td>{{ ucwords(str_replace('_', ' ', $column)) }}</td>
+                @foreach ($columns as $column => $value)
+                    <td>{{ ucwords(str_replace('_', ' ', $value['column_name'])) }}</td>
                 @endforeach
                 <td>Action</td>
             </tr>
             @foreach ($users as $user)
                 <tr class="u-t-gray">
-                @foreach ($columns as $column)
+                @foreach ($columns_selected as $cs)
                     <td 
-                        @if ($column == 'status')
-                            @if ($user->$column == 'ACTIVE')
+                        @if ($cs == 'status')
+                            @if ($user->$cs == 'ACTIVE')
                                 class="u-t-success u-fw-b"
                             @else
-                                class="u-t-danger"
+                                class="u-t-danger u-fw-b"
                             @endif
                         @endif
-                        >{{ $user->$column }}
+                        >{{ $user->$cs }}
                     </td>
                 @endforeach
                     <td>
